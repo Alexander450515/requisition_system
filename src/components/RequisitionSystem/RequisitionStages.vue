@@ -1,5 +1,5 @@
 <template>
-  <v-stepper v-model="currentStep">
+  <v-stepper>
     <v-stepper-header>
       <template v-for="(stage, index) in currentRequisitionStages">
         <v-stepper-step
@@ -41,7 +41,7 @@ export default {
     editedItem: Object,
   },
   data: () => ({
-    currentStep: 1,
+    // currentStep: this.editedItem.current_step,
   }),
   computed: {
     ...mapGetters(["CURRENT_USER_PERMISSIONS", "REQUISITION_TYPES"]),
@@ -50,11 +50,21 @@ export default {
         (type) => type.requisition_type == this.editedItem.requisition_type
       ).stages;
     },
+    currentStep() {
+      return this.editedItem.current_step;
+    },
   },
   methods: {
     nextStep(step) {
       if (step < this.currentRequisitionStages.length) {
-        this.currentStep = step + 1;
+        let currentStep = this.editedItem.current_step + 1;
+        console.log(currentStep);
+        let id = this.editedItem.id;
+        console.log(id);
+        this.$store.dispatch("CHANGE_STAGE", {
+          current_step: currentStep,
+          id: id,
+        });
       }
     },
   },

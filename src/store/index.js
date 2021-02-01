@@ -103,6 +103,16 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+    async CHANGE_STAGE({ dispatch }, { id, current_step }) {
+      try {
+        await axios.patch("http://localhost:3000/requisitions/" + id, {
+          current_step: current_step,
+        });
+        dispatch("GET_REQUISITIONS");
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   getters: {
     REQUISITIONS(state) {
