@@ -63,20 +63,16 @@
   ],
   "requisitions": [
     {
-      "status": "Передана на визирование",
-      "create_date": "01.02.2021, 17:04:32",
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
-      "current_step": 2,
+      "current_step": 1,
+      "requisition_history": [
+        {
+          "date": "01.02.2021, 23:18:53",
+          "status": "Создана"
+        }
+      ],
       "id": 1
-    },
-    {
-      "status": "Передана на визирование",
-      "create_date": "01.02.2021, 17:12:24",
-      "requisition_creator": "Администратор",
-      "requisition_type": "Одноразовый",
-      "current_step": 2,
-      "id": 2
     }
   ]
 }

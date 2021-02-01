@@ -65,9 +65,14 @@ export default new Vuex.Store({
     },
     async CHANGE_STATUS_TO_AGREEMENT({ dispatch }, id) {
       try {
-        await axios.patch("http://localhost:3000/requisitions/" + id, {
+        await axios.post("http://localhost:3000/requisitions/" + id, {
           status: "Передана на визирование",
+          date: new Date().toLocaleString(),
         });
+        // Должен добавлять в [] requisition_history
+        // Необходимо поменять url , для того чтобы делать POST
+        // в http://localhost:3000/requisitions/:id/requisition_history
+        // json server custom routes
         dispatch("GET_REQUISITIONS");
       } catch (error) {
         console.log(error);
@@ -105,10 +110,16 @@ export default new Vuex.Store({
     },
     async CHANGE_STAGE({ dispatch }, { id, current_step }) {
       try {
-        await axios.patch("http://localhost:3000/requisitions/" + id, {
-          current_step: current_step,
-        });
-        dispatch("GET_REQUISITIONS");
+        const response = await axios.patch(
+          "http://localhost:3000/requisitions/" + id,
+          {
+            current_step: current_step,
+          }
+        );
+        if (response.status == 200) {
+          console.log(`CHANGE_STAGE ${response.status}`);
+          dispatch("GET_REQUISITIONS");
+        }
       } catch (error) {
         console.log(error);
       }

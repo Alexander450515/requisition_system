@@ -1,13 +1,14 @@
 <template>
-  <v-stepper>
+  <v-stepper v-model="currentStep">
     <v-stepper-header>
       <template v-for="(stage, index) in currentRequisitionStages">
         <v-stepper-step
           :key="`${index + 1}-step`"
-          :complete="currentStep > index"
           :step="index + 1"
+          :complete="currentStep > index + 1"
+          color="success"
         >
-          {{ `${stage} ${index + 1}` }}
+          {{ stage }}
         </v-stepper-step>
         <v-divider
           v-if="index !== currentRequisitionStages.length - 1"
@@ -22,11 +23,11 @@
         :key="`${index + 1}-content`"
         :step="index + 1"
       >
-        <v-btn @click="nextStep(index + 1)">
+        <v-btn color="success" @click="nextStep(index + 1)">
           Continue
         </v-btn>
 
-        <v-btn text>
+        <v-btn text @click="$emit('closeRequisitionModalWindow')">
           Cancel
         </v-btn>
       </v-stepper-content>
@@ -39,32 +40,26 @@ import { mapGetters } from "vuex";
 export default {
   props: {
     editedItem: Object,
+    currentRequisitionStages: Array,
+    currentStep: Number,
   },
-  data: () => ({
-    // currentStep: this.editedItem.current_step,
-  }),
+  data: () => ({}),
   computed: {
-    ...mapGetters(["CURRENT_USER_PERMISSIONS", "REQUISITION_TYPES"]),
-    currentRequisitionStages() {
-      return this.REQUISITION_TYPES.find(
-        (type) => type.requisition_type == this.editedItem.requisition_type
-      ).stages;
-    },
-    currentStep() {
-      return this.editedItem.current_step;
-    },
+    ...mapGetters(["CURRENT_USER_PERMISSIONS"]),
   },
   methods: {
     nextStep(step) {
       if (step < this.currentRequisitionStages.length) {
         let currentStep = this.editedItem.current_step + 1;
-        console.log(currentStep);
+        console.log(`currentStep ${currentStep}`);
         let id = this.editedItem.id;
-        console.log(id);
         this.$store.dispatch("CHANGE_STAGE", {
           current_step: currentStep,
           id: id,
         });
+        this.$emit("closeRequisitionModalWindow");
+        this.$emit("showInformativeMessage");
+        // Тут нужно добавить время и этав визирования в историю
       }
     },
   },
