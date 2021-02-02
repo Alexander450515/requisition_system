@@ -4,7 +4,7 @@
       :headers="headers"
       :items="REQUISITIONS"
       :items-per-page="10"
-      sort-by="requisitionNumber"
+      sort-by="id"
       :search="search.search"
       calculate-widths
     >
@@ -15,7 +15,7 @@
       <template v-slot:[`item.actions`]="{ item }">
         <!-- Передать на визирование -->
         <v-btn
-          v-if="item.requisition_history[0].status == 'Создана'"
+          v-if="lastRequisitionEvent(item) == 'Создана'"
           color="success"
           small
           rounded
@@ -25,7 +25,7 @@
           Передать на визирование
         </v-btn>
         <!-- open -->
-        <v-btn
+        <!-- <v-btn
           v-if="item.status == 'Передана на визирование'"
           color="success"
           small
@@ -34,7 +34,7 @@
           @click="openRequisition(item)"
         >
           Открыть
-        </v-btn>
+        </v-btn> -->
         <v-dialog v-model="dialogOpen" max-width="1200px" :retain-focus="false">
           <div class="white">
             <RequisitionStages
@@ -73,8 +73,8 @@ export default {
     snackbar: { snackbar: false },
     headers: [
       { text: "№", value: "id" },
-      { text: "Статус", value: "requisition_history[0].status" },
-      { text: "Время создания", value: "requisition_history[0].date" },
+      // { text: "Статус", value: "" },
+      { text: "Время создания", value: "create_date" },
       { text: "Заявитель", value: "requisition_creator" },
       { text: "Тип заявки", value: "requisition_type" },
       { text: "", value: "actions", width: 260 },
@@ -83,6 +83,30 @@ export default {
     editedItem: {},
   }),
   methods: {
+    lastRequisitionEvent(requisition) {
+      let group = {};
+      let arrayOfAllEventsOfSelectedRequisition = this.REQUISITIONS_HISTORY.filter(
+        (event) => {
+          return event.requisition_id == requisition.id;
+        }
+      );
+      console.log(
+        arrayOfAllEventsOfSelectedRequisition,
+        group,
+        "arrayOfAllEventsOfSelectedRequisition"
+      );
+      // arrayOfAllEventsOfSelectedRequisition.forEach((event, index) => {
+      // const date = new Date(event.date);
+      //
+      // });
+    },
+    //
+    //
+    //
+    //
+    //
+    //
+    //
     openRequisition(requisition) {
       this.editedIndex = this.REQUISITIONS.indexOf(requisition);
       this.editedItem = Object.assign({}, requisition);
@@ -92,9 +116,8 @@ export default {
       this.dialogOpen = false;
     },
     sendToAgreement(requisition) {
-      console.log(requisition.id);
+      // console.log(requisition.id);
       return this.$store.dispatch("CHANGE_STATUS_TO_AGREEMENT", requisition.id);
-      // Должен добавлять в [] requisition_history
     },
     showInformativeMessage() {
       this.snackbar.snackbar = true;
@@ -104,7 +127,11 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["REQUISITIONS", "REQUISITION_TYPES"]),
+    ...mapGetters([
+      "REQUISITIONS",
+      "REQUISITION_TYPES",
+      "REQUISITIONS_HISTORY",
+    ]),
     currentRequisitionStages() {
       let editedItem = this.editedItem.requisition_type;
       if (editedItem != undefined) {

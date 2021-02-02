@@ -6,10 +6,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    requisitions: [],
     users: [],
     requisition_types: [],
+    requisitions: [],
     selectedUser: "",
+    requisitions_history: [],
   },
   mutations: {
     SET_REQUISITIONS_TO_STATE: (state, requisitions) => {
@@ -21,15 +22,37 @@ export default new Vuex.Store({
     SET_USERS_TO_STATE: (state, users) => {
       state.users = users;
     },
+    SET_HISTORY_TO_STATE: (state, requisitions_history) => {
+      state.requisitions_history = requisitions_history;
+    },
     SET_SELECTED_USER: (state, selectedUser) => {
       state.selectedUser = selectedUser;
     },
   },
   actions: {
-    async CREATE_REQUISITION({ dispatch }, requisition) {
+    async CREATE_REQUISITION({ dispatch, commit, getters }, requisition) {
       try {
         await axios.post("http://localhost:3000/requisitions", requisition);
+        const requisitions = await axios.get(
+          "http://localhost:3000/requisitions"
+        );
+        commit("SET_REQUISITIONS_TO_STATE", requisitions.data);
+        await dispatch("CREATE_EVENT_CREATED", getters.REQUISITIONS);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async CREATE_EVENT_CREATED({ dispatch }, requisition) {
+      try {
+        console.log(requisition, "test");
+        console.log(requisition[requisition.length - 1].id);
+        await axios.post("http://localhost:3000/requisitions_history", {
+          date: new Date().toLocaleString(),
+          status: "Создана",
+          requisition_id: requisition[requisition.length - 1].id,
+        });
         dispatch("GET_REQUISITIONS");
+        dispatch("GET_REQUISITIONS_HISTORY");
       } catch (error) {
         console.log(error);
       }
@@ -57,22 +80,27 @@ export default new Vuex.Store({
         const requisition_types = await axios.get(
           "http://localhost:3000/requisition_types"
         );
-        // console.log(requisition_types);
         commit("SET_REQUISITION_TYPES_TO_STATE", requisition_types.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async GET_REQUISITIONS_HISTORY({ commit }) {
+      try {
+        const requisitions_history = await axios.get(
+          "http://localhost:3000/requisitions_history"
+        );
+        commit("SET_HISTORY_TO_STATE", requisitions_history.data);
       } catch (error) {
         console.log(error);
       }
     },
     async CHANGE_STATUS_TO_AGREEMENT({ dispatch }, id) {
       try {
-        await axios.post("http://localhost:3000/requisitions/" + id, {
+        await axios.patch(`http://localhost:3000/requisitions/${id}`, {
           status: "Передана на визирование",
           date: new Date().toLocaleString(),
         });
-        // Должен добавлять в [] requisition_history
-        // Необходимо поменять url , для того чтобы делать POST
-        // в http://localhost:3000/requisitions/:id/requisition_history
-        // json server custom routes
         dispatch("GET_REQUISITIONS");
       } catch (error) {
         console.log(error);
@@ -145,6 +173,9 @@ export default new Vuex.Store({
     },
     REQUISITION_TYPES(state) {
       return state.requisition_types;
+    },
+    REQUISITIONS_HISTORY(state) {
+      return state.requisitions_history;
     },
   },
 });

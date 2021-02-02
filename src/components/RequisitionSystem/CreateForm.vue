@@ -62,21 +62,14 @@ export default {
   methods: {
     submitHandler() {
       let requisition = {
-        // create_date: new Date().toLocaleString(),
         requisition_creator: this.CURRENT_USER,
         requisition_type: this.requisition_type,
         current_step: 1,
-        requisition_history: [
-          {
-            date: new Date().toLocaleString(),
-            status: "Создана",
-          },
-        ],
+        create_date: new Date().toLocaleString(),
       };
       if (this.$refs.form.validate()) {
         this.$store.dispatch("CREATE_REQUISITION", requisition);
         this.$emit("closeModalWindow");
-        // this.resetForm();
       }
       console.log("submitHandler");
     },

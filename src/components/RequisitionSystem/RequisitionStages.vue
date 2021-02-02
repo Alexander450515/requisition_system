@@ -59,7 +59,7 @@ export default {
         });
         this.$emit("closeRequisitionModalWindow");
         this.$emit("showInformativeMessage");
-        // Тут нужно добавить время и этав визирования в историю
+        // Тут нужно добавить время и этап визирования в историю
       }
     },
   },

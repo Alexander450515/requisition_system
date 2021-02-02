@@ -31,12 +31,18 @@ export default {
     drawer: null,
   }),
   methods: {
-    ...mapActions(["GET_REQUISITIONS", "GET_USERS", "GET_REQUISITION_TYPES"]),
+    ...mapActions([
+      "GET_REQUISITIONS",
+      "GET_USERS",
+      "GET_REQUISITION_TYPES",
+      "GET_REQUISITIONS_HISTORY",
+    ]),
   },
   created() {
     this.GET_REQUISITIONS();
     this.GET_USERS();
     this.GET_REQUISITION_TYPES();
+    this.GET_REQUISITIONS_HISTORY();
   },
 };
 </script>
