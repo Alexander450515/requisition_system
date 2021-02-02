@@ -44,8 +44,6 @@ export default new Vuex.Store({
     },
     async CREATE_EVENT_CREATED({ dispatch, getters }, requisition) {
       try {
-        console.log(requisition, "test");
-        console.log(requisition[requisition.length - 1].id);
         await axios.post("http://localhost:3000/requisitions_history", {
           date: new Date().toLocaleString(),
           status: "Создана",
@@ -58,17 +56,16 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async CREATE_EVENT_TO_AGREEMENT({ dispatch }, requisition) {
+    async CREATE_EVENT_TO_AGREEMENT({ dispatch, getters }, id) {
       try {
-        console.log(requisition, "test");
-        console.log(requisition[requisition.length - 1].id);
         await axios.post("http://localhost:3000/requisitions_history", {
           date: new Date().toLocaleString(),
           status: "Передана на визирование",
-          requisition_id: requisition[requisition.length - 1].id,
+          requisition_id: id,
+          user: getters.CURRENT_USER,
         });
-        dispatch("GET_REQUISITIONS");
-        dispatch("GET_REQUISITIONS_HISTORY");
+        await dispatch("GET_REQUISITIONS");
+        await dispatch("GET_REQUISITIONS_HISTORY");
       } catch (error) {
         console.log(error);
       }
@@ -111,13 +108,16 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async TO_AGREEMENT({ dispatch, getters }, id) {
+    async TO_AGREEMENT({ dispatch, commit }, id) {
       try {
         await axios.patch(`http://localhost:3000/requisitions/${id}`, {
           status: "Передана на визирование",
         });
-        dispatch("GET_REQUISITIONS");
-        await dispatch("CREATE_EVENT_TO_AGREEMENT", getters.REQUISITIONS);
+        const requisitions = await axios.get(
+          "http://localhost:3000/requisitions"
+        );
+        commit("SET_REQUISITIONS_TO_STATE", requisitions.data);
+        await dispatch("CREATE_EVENT_TO_AGREEMENT", id);
       } catch (error) {
         console.log(error);
       }

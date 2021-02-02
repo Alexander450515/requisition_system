@@ -66,24 +66,91 @@
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
       "current_step": 1,
-      "create_date": "02.02.2021, 21:14:55",
+      "create_date": "02.02.2021, 23:10:59",
       "status": "Передана на визирование",
       "id": 1
+    },
+    {
+      "requisition_creator": "Оператор",
+      "requisition_type": "Временный",
+      "current_step": 1,
+      "create_date": "02.02.2021, 23:11:20",
+      "status": "Передана на визирование",
+      "id": 2
+    },
+    {
+      "requisition_creator": "Специалист по безопасности",
+      "requisition_type": "Одноразовый",
+      "current_step": 1,
+      "create_date": "02.02.2021, 23:11:27",
+      "status": "Передана на визирование",
+      "id": 3
+    },
+    {
+      "requisition_creator": "Охраник",
+      "requisition_type": "Постоянный",
+      "current_step": 2,
+      "create_date": "02.02.2021, 23:20:28",
+      "status": "Передана на визирование",
+      "id": 4
     }
   ],
   "requisitions_history": [
     {
-      "date": "02.02.2021, 21:14:55",
+      "date": "02.02.2021, 23:10:59",
       "status": "Создана",
       "requisition_id": 1,
       "user": "Администратор",
       "id": 1
     },
     {
-      "date": "02.02.2021, 21:21:08",
+      "date": "02.02.2021, 23:11:21",
+      "status": "Создана",
+      "requisition_id": 2,
+      "user": "Оператор",
+      "id": 2
+    },
+    {
+      "date": "02.02.2021, 23:11:27",
+      "status": "Создана",
+      "requisition_id": 3,
+      "user": "Специалист по безопасности",
+      "id": 3
+    },
+    {
+      "date": "02.02.2021, 23:11:46",
       "status": "Передана на визирование",
       "requisition_id": 1,
-      "id": 2
+      "user": "Специалист по безопасности",
+      "id": 4
+    },
+    {
+      "date": "02.02.2021, 23:12:02",
+      "status": "Передана на визирование",
+      "requisition_id": 3,
+      "user": "Оператор",
+      "id": 5
+    },
+    {
+      "date": "02.02.2021, 23:12:07",
+      "status": "Передана на визирование",
+      "requisition_id": 2,
+      "user": "Оператор",
+      "id": 6
+    },
+    {
+      "date": "02.02.2021, 23:20:28",
+      "status": "Создана",
+      "requisition_id": 4,
+      "user": "Охраник",
+      "id": 7
+    },
+    {
+      "date": "02.02.2021, 23:20:39",
+      "status": "Передана на визирование",
+      "requisition_id": 4,
+      "user": "Администратор",
+      "id": 8
     }
   ]
 }

@@ -4,6 +4,8 @@
       :headers="headers"
       :items="REQUISITIONS"
       :items-per-page="10"
+      :expanded.sync="expanded"
+      show-expand
       sort-by="id"
       :search="search.search"
       calculate-widths
@@ -48,6 +50,17 @@
           </div>
         </v-dialog>
       </template>
+      <template v-slot:expanded-item="{ headers, item }">
+        <td :colspan="headers.length">
+          <strong>Последнее действие:</strong>
+          <!-- {{ lastEvent(item) }} -->
+          {{
+            `${lastEvent(item).user} изменил статус заявки на "${
+              lastEvent(item).status
+            }" в ${lastEvent(item).date}`
+          }}
+        </td>
+      </template>
     </v-data-table>
     <InformativeMessage
       :snackbar="snackbar"
@@ -68,6 +81,7 @@ import { mapGetters } from "vuex";
 export default {
   components: { TopTable, RequisitionStages, InformativeMessage },
   data: () => ({
+    expanded: [],
     search: { search: "" },
     dialogOpen: false,
     snackbar: { snackbar: false },
@@ -83,58 +97,35 @@ export default {
     editedItem: {},
   }),
   methods: {
+    lastEvent(requisition) {
+      let events = this.arrayOfAllEventsOfSelectedRequisition(requisition);
+      let arrayOfIds = events.map((event) => event.id);
+      let maxId = Math.max.apply(Math, arrayOfIds);
+      let lastEvent = this.REQUISITIONS_HISTORY.find(
+        (event) => event.id == maxId
+      );
+      if (lastEvent == undefined) {
+        return {
+          date: "",
+          status: "",
+          requisition_id: 0,
+          user: "",
+          id: 0,
+        };
+      } else {
+        return lastEvent;
+      }
+    },
     arrayOfAllEventsOfSelectedRequisition(requisition) {
-      this.REQUISITIONS_HISTORY.filter((event) => {
+      let arr = this.REQUISITIONS_HISTORY.filter((event) => {
         return event.requisition_id == requisition.id;
       });
-    },
-    // currentRequisitionStatus(requisition) {
-    //   if (this.lastAndFirstRequisitionEvent(requisition).last != undefined) {
-    //     return this.lastAndFirstRequisitionEvent(requisition).last.status;
-    //   }
-    // },
-    lastAndFirstRequisitionEvent(requisition) {
-      let lastAndFirstEvent = {};
-      let arrayOfAllEventsOfSelectedRequisition = this.REQUISITIONS_HISTORY.filter(
-        (event) => {
-          return event.requisition_id == requisition.id;
-        }
-      );
-      if (arrayOfAllEventsOfSelectedRequisition != undefined) {
-        arrayOfAllEventsOfSelectedRequisition.forEach((event, index) => {
-          const date = new Date(event.date);
-          if (index === 0) {
-            lastAndFirstEvent["first"] = lastAndFirstEvent["last"] = {
-              id: event.id,
-              date: date,
-              status: event.status,
-              requisition_id: event.requisition_id,
-            };
-            return;
-          }
-          if (date > lastAndFirstEvent["last"].date) {
-            lastAndFirstEvent["last"] = {
-              id: event.id,
-              date: date,
-              status: event.status,
-              requisition_id: event.requisition_id,
-            };
-          }
-          if (date < lastAndFirstEvent["first"].date) {
-            lastAndFirstEvent["first"] = {
-              id: event.id,
-              date: date,
-              status: event.status,
-              requisition_id: event.requisition_id,
-            };
-          }
-        });
+      if (arr != undefined) {
+        // console.log(arr, "arr");
+        return arr;
       }
-      console.log(lastAndFirstEvent, "lastAndFirstEvent");
-      return lastAndFirstEvent;
     },
-    //
-    //
+
     openRequisition(requisition) {
       this.editedIndex = this.REQUISITIONS.indexOf(requisition);
       this.editedItem = Object.assign({}, requisition);
