@@ -42,13 +42,29 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async CREATE_EVENT_CREATED({ dispatch }, requisition) {
+    async CREATE_EVENT_CREATED({ dispatch, getters }, requisition) {
       try {
         console.log(requisition, "test");
         console.log(requisition[requisition.length - 1].id);
         await axios.post("http://localhost:3000/requisitions_history", {
           date: new Date().toLocaleString(),
           status: "Создана",
+          requisition_id: requisition[requisition.length - 1].id,
+          user: getters.CURRENT_USER,
+        });
+        dispatch("GET_REQUISITIONS");
+        dispatch("GET_REQUISITIONS_HISTORY");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async CREATE_EVENT_TO_AGREEMENT({ dispatch }, requisition) {
+      try {
+        console.log(requisition, "test");
+        console.log(requisition[requisition.length - 1].id);
+        await axios.post("http://localhost:3000/requisitions_history", {
+          date: new Date().toLocaleString(),
+          status: "Передана на визирование",
           requisition_id: requisition[requisition.length - 1].id,
         });
         dispatch("GET_REQUISITIONS");
@@ -95,13 +111,13 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async CHANGE_STATUS_TO_AGREEMENT({ dispatch }, id) {
+    async TO_AGREEMENT({ dispatch, getters }, id) {
       try {
         await axios.patch(`http://localhost:3000/requisitions/${id}`, {
           status: "Передана на визирование",
-          date: new Date().toLocaleString(),
         });
         dispatch("GET_REQUISITIONS");
+        await dispatch("CREATE_EVENT_TO_AGREEMENT", getters.REQUISITIONS);
       } catch (error) {
         console.log(error);
       }

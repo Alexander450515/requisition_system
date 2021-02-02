@@ -66,41 +66,24 @@
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
       "current_step": 1,
-      "create_date": "02.02.2021, 14:49:06",
+      "create_date": "02.02.2021, 21:14:55",
+      "status": "Передана на визирование",
       "id": 1
-    },
-    {
-      "requisition_creator": "Специалист по безопасности",
-      "requisition_type": "Одноразовый",
-      "current_step": 1,
-      "create_date": "02.02.2021, 17:48:02",
-      "id": 2
     }
   ],
   "requisitions_history": [
     {
-      "date": "02.02.2021, 14:49:06",
+      "date": "02.02.2021, 21:14:55",
       "status": "Создана",
       "requisition_id": 1,
+      "user": "Администратор",
       "id": 1
     },
     {
-      "date": "02.12.2021, 14:49:06",
-      "status": "Создана",
+      "date": "02.02.2021, 21:21:08",
+      "status": "Передана на визирование",
       "requisition_id": 1,
       "id": 2
-    },
-    {
-      "date": "02.02.2022, 14:49:06",
-      "status": "Создана",
-      "requisition_id": 1,
-      "id": 3
-    },
-    {
-      "date": "02.02.2021, 17:48:03",
-      "status": "Создана",
-      "requisition_id": 2,
-      "id": 4
     }
   ]
 }

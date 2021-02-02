@@ -15,7 +15,7 @@
       <template v-slot:[`item.actions`]="{ item }">
         <!-- Передать на визирование -->
         <v-btn
-          v-if="lastRequisitionEvent(item) == 'Создана'"
+          v-if="item.status == 'Создана'"
           color="success"
           small
           rounded
@@ -25,7 +25,7 @@
           Передать на визирование
         </v-btn>
         <!-- open -->
-        <!-- <v-btn
+        <v-btn
           v-if="item.status == 'Передана на визирование'"
           color="success"
           small
@@ -34,7 +34,7 @@
           @click="openRequisition(item)"
         >
           Открыть
-        </v-btn> -->
+        </v-btn>
         <v-dialog v-model="dialogOpen" max-width="1200px" :retain-focus="false">
           <div class="white">
             <RequisitionStages
@@ -73,7 +73,7 @@ export default {
     snackbar: { snackbar: false },
     headers: [
       { text: "№", value: "id" },
-      // { text: "Статус", value: "" },
+      { text: "Статус", value: "status" },
       { text: "Время создания", value: "create_date" },
       { text: "Заявитель", value: "requisition_creator" },
       { text: "Тип заявки", value: "requisition_type" },
@@ -83,28 +83,56 @@ export default {
     editedItem: {},
   }),
   methods: {
-    lastRequisitionEvent(requisition) {
-      let group = {};
+    arrayOfAllEventsOfSelectedRequisition(requisition) {
+      this.REQUISITIONS_HISTORY.filter((event) => {
+        return event.requisition_id == requisition.id;
+      });
+    },
+    // currentRequisitionStatus(requisition) {
+    //   if (this.lastAndFirstRequisitionEvent(requisition).last != undefined) {
+    //     return this.lastAndFirstRequisitionEvent(requisition).last.status;
+    //   }
+    // },
+    lastAndFirstRequisitionEvent(requisition) {
+      let lastAndFirstEvent = {};
       let arrayOfAllEventsOfSelectedRequisition = this.REQUISITIONS_HISTORY.filter(
         (event) => {
           return event.requisition_id == requisition.id;
         }
       );
-      console.log(
-        arrayOfAllEventsOfSelectedRequisition,
-        group,
-        "arrayOfAllEventsOfSelectedRequisition"
-      );
-      // arrayOfAllEventsOfSelectedRequisition.forEach((event, index) => {
-      // const date = new Date(event.date);
-      //
-      // });
+      if (arrayOfAllEventsOfSelectedRequisition != undefined) {
+        arrayOfAllEventsOfSelectedRequisition.forEach((event, index) => {
+          const date = new Date(event.date);
+          if (index === 0) {
+            lastAndFirstEvent["first"] = lastAndFirstEvent["last"] = {
+              id: event.id,
+              date: date,
+              status: event.status,
+              requisition_id: event.requisition_id,
+            };
+            return;
+          }
+          if (date > lastAndFirstEvent["last"].date) {
+            lastAndFirstEvent["last"] = {
+              id: event.id,
+              date: date,
+              status: event.status,
+              requisition_id: event.requisition_id,
+            };
+          }
+          if (date < lastAndFirstEvent["first"].date) {
+            lastAndFirstEvent["first"] = {
+              id: event.id,
+              date: date,
+              status: event.status,
+              requisition_id: event.requisition_id,
+            };
+          }
+        });
+      }
+      console.log(lastAndFirstEvent, "lastAndFirstEvent");
+      return lastAndFirstEvent;
     },
-    //
-    //
-    //
-    //
-    //
     //
     //
     openRequisition(requisition) {
@@ -117,7 +145,7 @@ export default {
     },
     sendToAgreement(requisition) {
       // console.log(requisition.id);
-      return this.$store.dispatch("CHANGE_STATUS_TO_AGREEMENT", requisition.id);
+      return this.$store.dispatch("TO_AGREEMENT", requisition.id);
     },
     showInformativeMessage() {
       this.snackbar.snackbar = true;
