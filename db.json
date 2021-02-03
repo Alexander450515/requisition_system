@@ -81,6 +81,16 @@
       "last_complited_stage": "Передача в БП",
       "current_stage": "Передача в БП",
       "id": 2
+    },
+    {
+      "requisition_creator": "Администратор",
+      "requisition_type": "Постоянный",
+      "current_step": 1,
+      "create_date": "04.02.2021, 00:05:20",
+      "status": "Передана на визирование",
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 3
     }
   ],
   "requisitions_history": [
@@ -163,6 +173,41 @@
       "requisition_id": 2,
       "last_complited_stage": "Передача в БП",
       "id": 9
+    },
+    {
+      "date": "03.02.2021, 23:56:34",
+      "status": "Принята к исполнению",
+      "user": "Администратор",
+      "requisition_id": 2,
+      "last_complited_stage": "Передача в БП",
+      "id": 10
+    },
+    {
+      "date": "04.02.2021, 00:05:20",
+      "status": "Создана",
+      "user": "Администратор",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "",
+      "id": 11
+    },
+    {
+      "date": "04.02.2021, 00:11:48",
+      "status": "Передана на визирование",
+      "user": "",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 12
+    },
+    {
+      "date": "04.02.2021, 00:11:48",
+      "status": "Передана на визирование",
+      "user": "",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 13
     }
   ]
 }

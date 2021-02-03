@@ -138,7 +138,6 @@ export default {
         return arr;
       }
     },
-
     openRequisition(requisition) {
       this.editedIndex = this.REQUISITIONS.indexOf(requisition);
       this.editedItem = Object.assign({}, requisition);
@@ -157,6 +156,22 @@ export default {
         current_step: this.currentStep,
       });
     },
+    requisitionStages(requisition) {
+      let requisition_types = requisition.requisition_type;
+      if (requisition_types != undefined) {
+        console.log(
+          this.REQUISITION_TYPES.find(
+            (type) => type.requisition_type == requisition_types
+          ).stages,
+          "requisitionStages"
+        );
+        return this.REQUISITION_TYPES.find(
+          (type) => type.requisition_type == requisition_types
+        ).stages;
+      } else {
+        return [];
+      }
+    },
     showInformativeMessage() {
       this.snackbar.snackbar = true;
     },
@@ -169,6 +184,7 @@ export default {
       "REQUISITIONS",
       "REQUISITION_TYPES",
       "REQUISITIONS_HISTORY",
+      "CURRENT_USER_PERMISSIONS",
     ]),
     currentRequisitionStages() {
       let editedItem = this.editedItem.requisition_type;

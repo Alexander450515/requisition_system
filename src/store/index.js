@@ -166,6 +166,10 @@ export default new Vuex.Store({
         (user) => user.name == getters.CURRENT_USER
       );
       if (currentUserObject != undefined) {
+        console.log(
+          currentUserObject.permissions,
+          " currentUserObject.permissions"
+        );
         return currentUserObject.permissions;
       }
     },
