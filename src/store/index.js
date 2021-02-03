@@ -29,6 +29,7 @@ export default new Vuex.Store({
       state.selectedUser = selectedUser;
     },
   },
+
   actions: {
     async GET_REQUISITIONS({ commit }) {
       try {
@@ -68,98 +69,41 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async TO_AGREEMENT(
-      { dispatch, commit },
-      { id, current_stage, last_complited_stage, status, current_step }
+    async CREATE_REQUISITION(
+      { dispatch, getters },
+      {
+        requisition_creator,
+        requisition_type,
+        current_step,
+        create_date,
+        status,
+        last_complited_stage,
+        current_stage,
+      }
     ) {
       try {
-        await axios.patch(`http://localhost:3000/requisitions/${id}`, {
-          status: status,
-          current_step: current_step,
-          last_complited_stage: last_complited_stage,
-          current_stage: current_stage,
-        });
-        const requisitions = await axios.get(
-          "http://localhost:3000/requisitions"
-        );
-        commit("SET_REQUISITIONS_TO_STATE", requisitions.data);
-        await dispatch("CREATE_EVENT_TO_AGREEMENT", {
-          id,
-          current_stage,
+        await axios.post("http://localhost:3000/requisitions", {
+          requisition_creator,
+          requisition_type,
+          current_step,
+          create_date,
+          status,
           last_complited_stage,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async CREATE_EVENT_TO_AGREEMENT(
-      { dispatch, getters },
-      { id, current_stage, last_complited_stage }
-    ) {
-      try {
-        await axios.post("http://localhost:3000/requisitions_history", {
-          date: new Date().toLocaleString(),
-          status: "Передана на визирование",
-          user: getters.CURRENT_USER,
-          requisition_id: id,
-          last_complited_stage: last_complited_stage,
-          current_stage: current_stage,
+          current_stage,
         });
         await dispatch("GET_REQUISITIONS");
-        await dispatch("GET_REQUISITIONS_HISTORY");
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async CREATE_EVENT(
-      { dispatch, getters },
-      { requisition_id, current_stage, last_complited_stage }
-    ) {
-      try {
-        await axios.post("http://localhost:3000/requisitions_history", {
-          date: new Date().toLocaleString(),
-          status: "Передана на визирование",
-          user: getters.CURRENT_USER,
+        let requisition_id =
+          getters.REQUISITIONS[getters.REQUISITIONS.length - 1].id;
+        await dispatch("CREATE_EVENT", {
+          status: status,
           requisition_id: requisition_id,
-          last_complited_stage: last_complited_stage,
           current_stage: current_stage,
+          last_complited_stage: last_complited_stage,
         });
-        await dispatch("GET_REQUISITIONS");
-        await dispatch("GET_REQUISITIONS_HISTORY");
       } catch (error) {
         console.log(error);
       }
     },
-    async CREATE_REQUISITION({ dispatch, commit }, requisition) {
-      try {
-        await axios.post("http://localhost:3000/requisitions", requisition);
-        const requisitions = await axios.get(
-          "http://localhost:3000/requisitions"
-        );
-        commit("SET_REQUISITIONS_TO_STATE", requisitions.data);
-        await dispatch("CREATE_EVENT_CREATED", requisition);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async CREATE_EVENT_CREATED({ dispatch, getters }, requisition) {
-      try {
-        await axios.post("http://localhost:3000/requisitions_history", {
-          date: new Date().toLocaleString(),
-          status: "Создана",
-          requisition_id:
-            getters.REQUISITIONS[getters.REQUISITIONS.length - 1].id,
-          user: getters.CURRENT_USER,
-          last_complited_stage: requisition.last_complited_stage,
-          current_stage: "",
-        });
-        dispatch("GET_REQUISITIONS");
-        dispatch("GET_REQUISITIONS_HISTORY");
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
     async CHANGE_STAGE(
       { dispatch },
       { id, current_stage, last_complited_stage, status, current_step }
@@ -174,8 +118,10 @@ export default new Vuex.Store({
             current_stage: current_stage,
           }
         );
+        await dispatch("GET_REQUISITIONS");
         if (response.status == 200) {
           await dispatch("CREATE_EVENT", {
+            status: status,
             requisition_id: id,
             current_stage: current_stage,
             last_complited_stage: last_complited_stage,
@@ -185,27 +131,21 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async TO_ACCEPTED(
-      { dispatch },
-      { id, current_step, last_complited_stage, current_stage }
+    async CREATE_EVENT(
+      { dispatch, getters },
+      { status, requisition_id, current_stage, last_complited_stage }
     ) {
       try {
-        const response = await axios.patch(
-          "http://localhost:3000/requisitions/" + id,
-          {
-            current_step: current_step,
-            last_complited_stage: last_complited_stage,
-            current_stage: current_stage,
-            status: "Принята к исполнению",
-          }
-        );
-        if (response.status == 200) {
-          await dispatch("CREATE_EVENT", {
-            requisition_id: id,
-            current_stage: current_stage,
-            last_complited_stage: last_complited_stage,
-          });
-        }
+        await axios.post("http://localhost:3000/requisitions_history", {
+          date: new Date().toLocaleString(),
+          status: status,
+          user: getters.CURRENT_USER,
+          requisition_id: requisition_id,
+          last_complited_stage: last_complited_stage,
+          current_stage: current_stage,
+        });
+        await dispatch("GET_REQUISITIONS");
+        await dispatch("GET_REQUISITIONS_HISTORY");
       } catch (error) {
         console.log(error);
       }

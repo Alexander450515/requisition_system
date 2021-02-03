@@ -7,7 +7,6 @@
       :expanded.sync="expanded"
       show-expand
       :search="search.search"
-      calculate-widths
     >
       <template v-slot:top>
         <TopTable :search="search" />
@@ -92,7 +91,7 @@ export default {
     headers: [
       { text: "№", value: "id" },
       { text: "Статус", value: "status" },
-      { text: "Этап заявки", value: "current_stage" },
+      { text: "Этап заявки", value: "current_stage", width: 300 },
       { text: "Время создания", value: "create_date" },
       { text: "Заявитель", value: "requisition_creator" },
       { text: "Тип заявки", value: "requisition_type" },
@@ -143,12 +142,13 @@ export default {
     sendToAgreement(requisition) {
       this.editedItem = Object.assign({}, requisition);
       console.log(this.currentStageName, "currentStageName");
-      return this.$store.dispatch("TO_AGREEMENT", {
+      console.log(this.lastComplitedStage, "lastComplitedStage");
+      return this.$store.dispatch("CHANGE_STAGE", {
         id: requisition.id,
-        current_step: 1,
         current_stage: this.currentStageName,
         status: "Передана на визирование",
-        last_complited_stage: this.lastComplitedStage,
+        last_complited_stage: "",
+        current_step: this.currentStep,
       });
     },
     showInformativeMessage() {

@@ -64,7 +64,7 @@ export default {
       let requisition = {
         requisition_creator: this.CURRENT_USER,
         requisition_type: this.requisition_type,
-        current_step: 0,
+        current_step: 1,
         create_date: new Date().toLocaleString(),
         status: "Создана",
         last_complited_stage: "",

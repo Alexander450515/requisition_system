@@ -23,7 +23,7 @@
         :key="`${index}-content`"
         :step="index + 1"
       >
-        <v-btn color="success" @click="nextStep(index + 1)">
+        <v-btn color="success" @click="accept(index + 1)">
           Согласовать
         </v-btn>
 
@@ -52,30 +52,26 @@ export default {
     },
   },
   methods: {
-    nextStep(step) {
-      let id = this.editedItem.id;
+    accept(step) {
+      let updatedRequisition = {
+        id: this.editedItem.id,
+        current_step: this.currentStep + 1,
+        status: "",
+        last_complited_stage: this.lastComplitedStage,
+        current_stage: this.currentStageName,
+      };
+
       if (step < this.currentRequisitionStages.length) {
-        // console.log(`currentStep ${currentStep}`);
-        console.log(`Этап "${this.lastComplitedStage}" пройден`);
-        console.log(this.currentStageName, "- текущий этап");
-        this.$store.dispatch("CHANGE_STAGE", {
-          id: id,
-          current_step: this.currentStep + 1,
-          last_complited_stage: this.lastComplitedStage,
-          current_stage: this.currentStageName,
-        });
-        this.$emit("closeRequisitionModalWindow");
-        this.$emit("showInformativeMessage");
-      } else if (step == this.currentRequisitionStages.length) {
-        this.$store.dispatch("TO_ACCEPTED", {
-          id: id,
-          current_step: this.currentStep + 1,
-          last_complited_stage: this.lastComplitedStage,
-          current_stage: this.currentStageName,
-        });
-        this.$emit("closeRequisitionModalWindow");
-        this.$emit("showInformativeMessage");
+        updatedRequisition.status = "Передана на визирование";
+        this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
       }
+      // Последний этап для отправления заявки в БП (Принята к исполнению)
+      else if (step == this.currentRequisitionStages.length) {
+        (updatedRequisition.status = "Принята к исполнению"),
+          this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
+      }
+      this.$emit("closeRequisitionModalWindow");
+      this.$emit("showInformativeMessage");
     },
   },
 };

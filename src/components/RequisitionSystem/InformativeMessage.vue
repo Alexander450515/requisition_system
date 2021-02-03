@@ -36,7 +36,7 @@ export default {
     currentStep: Number,
   },
   data: () => ({
-    timeout: 4000,
+    timeout: 2000,
     date: new Date().toLocaleString(),
   }),
   computed: {
