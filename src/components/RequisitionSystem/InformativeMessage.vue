@@ -7,7 +7,9 @@
       style="max-width: 500px;"
     >
       {{
-        `Этап визирования "${currentRequisitionStages[currentStep]}" успешно согласован. 
+        `Этап визирования "${
+          currentRequisitionStages[currentStep - 1]
+        }" успешно согласован. 
         Время согласования: ${date}`
       }}
 
@@ -34,7 +36,7 @@ export default {
     currentStep: Number,
   },
   data: () => ({
-    timeout: 2000,
+    timeout: 4000,
     date: new Date().toLocaleString(),
   }),
   computed: {

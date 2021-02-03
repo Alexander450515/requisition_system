@@ -42,7 +42,7 @@
               :editedItem="editedItem"
               :currentRequisitionStages="currentRequisitionStages"
               :currentStep="currentStep"
-              :currentStageName="currentStageName"
+              :lastComplitedStage="lastComplitedStage"
               @closeRequisitionModalWindow="closeRequisitionModalWindow"
               @openRequisition="openRequisition"
               @showInformativeMessage="showInformativeMessage"
@@ -92,7 +92,7 @@ export default {
     headers: [
       { text: "№", value: "id" },
       { text: "Статус", value: "status" },
-      { text: "Тип заявки", value: "current_stage" },
+      { text: "Этап заявки", value: "current_stage" },
       { text: "Время создания", value: "create_date" },
       { text: "Заявитель", value: "requisition_creator" },
       { text: "Тип заявки", value: "requisition_type" },
@@ -145,7 +145,10 @@ export default {
       console.log(this.currentStageName, "currentStageName");
       return this.$store.dispatch("TO_AGREEMENT", {
         id: requisition.id,
+        current_step: 1,
         current_stage: this.currentStageName,
+        status: "Передана на визирование",
+        last_complited_stage: this.lastComplitedStage,
       });
     },
     showInformativeMessage() {
@@ -176,7 +179,10 @@ export default {
       return this.editedItem.current_step;
     },
     currentStageName() {
-      return this.currentRequisitionStages[this.currentStep];
+      return this.currentRequisitionStages[this.currentStep - 1];
+    },
+    lastComplitedStage() {
+      return this.currentRequisitionStages[this.currentStep - 1];
     },
   },
 };

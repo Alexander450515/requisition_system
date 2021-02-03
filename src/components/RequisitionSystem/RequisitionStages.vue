@@ -3,7 +3,7 @@
     <v-stepper-header>
       <template v-for="(stage, index) in currentRequisitionStages">
         <v-stepper-step
-          :key="`${index + 1}-step`"
+          :key="`${index}-step`"
           :step="index + 1"
           :complete="currentStep > index + 1"
           color="success"
@@ -20,7 +20,7 @@
     <v-stepper-items>
       <v-stepper-content
         v-for="(stage, index) in currentRequisitionStages"
-        :key="`${index + 1}-content`"
+        :key="`${index}-content`"
         :step="index + 1"
       >
         <v-btn color="success" @click="nextStep(index + 1)">
@@ -42,13 +42,13 @@ export default {
     editedItem: Object,
     currentRequisitionStages: Array,
     currentStep: Number,
-    currentStageName: String,
+    lastComplitedStage: String,
   },
   data: () => ({}),
   computed: {
     ...mapGetters(["CURRENT_USER_PERMISSIONS"]),
-    lastComplitedStage() {
-      return this.currentRequisitionStages[this.currentStep - 1];
+    currentStageName() {
+      return this.currentRequisitionStages[this.currentStep];
     },
   },
   methods: {
@@ -66,17 +66,16 @@ export default {
         });
         this.$emit("closeRequisitionModalWindow");
         this.$emit("showInformativeMessage");
+      } else if (step == this.currentRequisitionStages.length) {
+        this.$store.dispatch("TO_ACCEPTED", {
+          id: id,
+          current_step: this.currentStep + 1,
+          last_complited_stage: this.lastComplitedStage,
+          current_stage: this.currentStageName,
+        });
+        this.$emit("closeRequisitionModalWindow");
+        this.$emit("showInformativeMessage");
       }
-      // else if (step == this.currentRequisitionStages.length) {
-      //   this.$store.dispatch("CHANGE_STAGE", {
-      // id: id,
-      // current_step: this.currentStep + 1,
-      // last_complited_stage: this.lastComplitedStage,
-      // current_stage: this.currentStageName,
-      //   });
-      //   this.$emit("closeRequisitionModalWindow");
-      //   this.$emit("showInformativeMessage");
-      // }
     },
   },
 };

@@ -65,17 +65,17 @@
     {
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
-      "current_step": 4,
-      "create_date": "03.02.2021, 20:17:42",
+      "current_step": 2,
+      "create_date": "03.02.2021, 21:12:46",
       "status": "Передана на визирование",
-      "last_complited_stage": "Инструктаж ТБ",
-      "current_stage": "Передача в БП",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
       "id": 1
     }
   ],
   "requisitions_history": [
     {
-      "date": "03.02.2021, 20:17:42",
+      "date": "03.02.2021, 21:12:46",
       "status": "Создана",
       "requisition_id": 1,
       "user": "Администратор",
@@ -84,40 +84,22 @@
       "id": 1
     },
     {
-      "date": "03.02.2021, 20:17:58",
+      "date": "03.02.2021, 21:21:08",
       "status": "Передана на визирование",
       "requisition_id": 1,
-      "user": "Администратор",
-      "last_complited_stage": "",
-      "current_stage": "Проверка отделом безопасности",
+      "user": "",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Первоначальное рассмотрение",
       "id": 2
     },
     {
-      "date": "03.02.2021, 20:18:09",
+      "date": "03.02.2021, 21:21:11",
       "status": "Передана на визирование",
-      "user": "Администратор",
+      "user": "",
       "requisition_id": 1,
       "last_complited_stage": "Первоначальное рассмотрение",
       "current_stage": "Проверка отделом безопасности",
       "id": 3
-    },
-    {
-      "date": "03.02.2021, 20:18:17",
-      "status": "Передана на визирование",
-      "user": "Администратор",
-      "requisition_id": 1,
-      "last_complited_stage": "Проверка отделом безопасности",
-      "current_stage": "Инструктаж ТБ",
-      "id": 4
-    },
-    {
-      "date": "03.02.2021, 20:19:13",
-      "status": "Передана на визирование",
-      "user": "Администратор",
-      "requisition_id": 1,
-      "last_complited_stage": "Инструктаж ТБ",
-      "current_stage": "Передача в БП",
-      "id": 5
     }
   ]
 }
