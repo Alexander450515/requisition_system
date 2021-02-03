@@ -57,7 +57,7 @@
           {{
             `${lastEvent(item).user} изменил статус заявки на "${
               lastEvent(item).status
-            }" в ${lastEvent(item).date}`
+            }" ${lastEvent(item).date}`
           }}
         </td>
       </template>
@@ -135,8 +135,17 @@ export default {
       this.dialogOpen = false;
     },
     sendToAgreement(requisition) {
-      // console.log(requisition.id);
-      return this.$store.dispatch("TO_AGREEMENT", requisition.id);
+      this.editedItem = Object.assign({}, requisition);
+      let currentStep = this.editedItem.current_step + 1;
+      let currentStage = this.currentRequisitionStages[currentStep - 2];
+      console.log(this.editedItem, "editedItem");
+      console.log(currentStep, "currentStep");
+      console.log(currentStage, "currentStage");
+      return this.$store.dispatch("TO_AGREEMENT", {
+        id: requisition.id,
+        current_stage: currentStage,
+        // currentStage отправляет не то. Здесь нужно поправить
+      });
     },
     showInformativeMessage() {
       this.snackbar.snackbar = true;

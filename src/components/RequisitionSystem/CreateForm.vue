@@ -67,6 +67,8 @@ export default {
         current_step: 1,
         create_date: new Date().toLocaleString(),
         status: "Создана",
+        last_complited_stage: "",
+        current_stage: "",
       };
       if (this.$refs.form.validate()) {
         this.$store.dispatch("CREATE_REQUISITION", requisition);

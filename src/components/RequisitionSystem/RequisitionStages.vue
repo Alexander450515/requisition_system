@@ -51,11 +51,17 @@ export default {
     nextStep(step) {
       if (step < this.currentRequisitionStages.length) {
         let currentStep = this.editedItem.current_step + 1;
+        let lastComplitedStage = this.currentRequisitionStages[currentStep - 2];
+        let currentStage = this.currentRequisitionStages[currentStep - 1];
         console.log(`currentStep ${currentStep}`);
+        console.log(`Этап "${lastComplitedStage}" пройден`);
+        console.log(currentStage, "- текущий этап");
         let id = this.editedItem.id;
         this.$store.dispatch("CHANGE_STAGE", {
           current_step: currentStep,
           id: id,
+          last_complited_stage: lastComplitedStage,
+          current_stage: currentStage,
         });
         this.$emit("closeRequisitionModalWindow");
         this.$emit("showInformativeMessage");

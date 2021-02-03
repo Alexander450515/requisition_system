@@ -7,10 +7,8 @@
       style="max-width: 500px;"
     >
       {{
-        `Этап визирования "${
-          currentRequisitionStages[currentStep]
-        }" успешно согласован. 
-        Время согласования: ${new Date().toLocaleString()}`
+        `Этап визирования "${currentRequisitionStages[currentStep]}" успешно согласован. 
+        Время согласования: ${date}`
       }}
 
       <template v-slot:action="{ attrs }">
@@ -37,6 +35,7 @@ export default {
   },
   data: () => ({
     timeout: 2000,
+    date: new Date().toLocaleString(),
   }),
   computed: {
     snackbarBoolean: {
