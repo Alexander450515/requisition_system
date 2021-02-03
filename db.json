@@ -66,36 +66,16 @@
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
       "current_step": 1,
-      "create_date": "03.02.2021, 23:55:39",
-      "status": "Отклонена",
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
-      "id": 1
-    },
-    {
-      "requisition_creator": "Администратор",
-      "requisition_type": "Постоянный",
-      "current_step": 5,
-      "create_date": "03.02.2021, 23:56:08",
-      "status": "Принята к исполнению",
-      "last_complited_stage": "Передача в БП",
-      "current_stage": "Передача в БП",
-      "id": 2
-    },
-    {
-      "requisition_creator": "Администратор",
-      "requisition_type": "Постоянный",
-      "current_step": 1,
-      "create_date": "04.02.2021, 00:05:20",
+      "create_date": "04.02.2021, 00:26:32",
       "status": "Передана на визирование",
       "last_complited_stage": "",
       "current_stage": "Первоначальное рассмотрение",
-      "id": 3
+      "id": 1
     }
   ],
   "requisitions_history": [
     {
-      "date": "03.02.2021, 23:55:39",
+      "date": "04.02.2021, 00:26:33",
       "status": "Создана",
       "user": "Администратор",
       "requisition_id": 1,
@@ -104,110 +84,13 @@
       "id": 1
     },
     {
-      "date": "03.02.2021, 23:55:42",
+      "date": "04.02.2021, 00:26:44",
       "status": "Передана на визирование",
       "user": "Администратор",
       "requisition_id": 1,
       "last_complited_stage": "",
       "current_stage": "Первоначальное рассмотрение",
       "id": 2
-    },
-    {
-      "date": "03.02.2021, 23:55:57",
-      "status": "Отклонена",
-      "user": "Администратор",
-      "requisition_id": 1,
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
-      "id": 3
-    },
-    {
-      "date": "03.02.2021, 23:56:08",
-      "status": "Создана",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "",
-      "current_stage": "",
-      "id": 4
-    },
-    {
-      "date": "03.02.2021, 23:56:13",
-      "status": "Передана на визирование",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "",
-      "current_stage": "Первоначальное рассмотрение",
-      "id": 5
-    },
-    {
-      "date": "03.02.2021, 23:56:19",
-      "status": "Передана на визирование",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
-      "id": 6
-    },
-    {
-      "date": "03.02.2021, 23:56:24",
-      "status": "Передана на визирование",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "Проверка отделом безопасности",
-      "current_stage": "Инструктаж ТБ",
-      "id": 7
-    },
-    {
-      "date": "03.02.2021, 23:56:27",
-      "status": "Утверждена",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "Инструктаж ТБ",
-      "current_stage": "Передача в БП",
-      "id": 8
-    },
-    {
-      "date": "03.02.2021, 23:56:34",
-      "status": "Принята к исполнению",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "Передача в БП",
-      "id": 9
-    },
-    {
-      "date": "03.02.2021, 23:56:34",
-      "status": "Принята к исполнению",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "Передача в БП",
-      "id": 10
-    },
-    {
-      "date": "04.02.2021, 00:05:20",
-      "status": "Создана",
-      "user": "Администратор",
-      "requisition_id": 3,
-      "last_complited_stage": "",
-      "current_stage": "",
-      "id": 11
-    },
-    {
-      "date": "04.02.2021, 00:11:48",
-      "status": "Передана на визирование",
-      "user": "",
-      "requisition_id": 3,
-      "last_complited_stage": "",
-      "current_stage": "Первоначальное рассмотрение",
-      "id": 12
-    },
-    {
-      "date": "04.02.2021, 00:11:48",
-      "status": "Передана на визирование",
-      "user": "",
-      "requisition_id": 3,
-      "last_complited_stage": "",
-      "current_stage": "Первоначальное рассмотрение",
-      "id": 13
     }
   ]
 }

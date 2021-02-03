@@ -109,6 +109,21 @@ export default {
     editedItem: {},
   }),
   methods: {
+    // color(item) {
+    //   return (
+    //     this.CURRENT_USER_PERMISSIONS.indexOf(requisitionStages(item)) != -1
+    //   );
+    // },
+    // requisitionStages(requisition) {
+    //   let requisition_types = requisition.requisition_type;
+    //   if (requisition_types != undefined) {
+    //     return this.REQUISITION_TYPES.find(
+    //       (type) => type.requisition_type == requisition_types
+    //     ).stages;
+    //   } else {
+    //     return [];
+    //   }
+    // },
     lastEvent(requisition) {
       let events = this.arrayOfAllEventsOfSelectedRequisition(requisition);
       let arrayOfIds = events.map((event) => event.id);
@@ -138,14 +153,6 @@ export default {
         return arr;
       }
     },
-    openRequisition(requisition) {
-      this.editedIndex = this.REQUISITIONS.indexOf(requisition);
-      this.editedItem = Object.assign({}, requisition);
-      this.dialogOpen = true;
-    },
-    closeRequisitionModalWindow() {
-      this.dialogOpen = false;
-    },
     sendToAgreement(requisition) {
       this.editedItem = Object.assign({}, requisition);
       return this.$store.dispatch("CHANGE_STAGE", {
@@ -156,27 +163,19 @@ export default {
         current_step: this.currentStep,
       });
     },
-    requisitionStages(requisition) {
-      let requisition_types = requisition.requisition_type;
-      if (requisition_types != undefined) {
-        console.log(
-          this.REQUISITION_TYPES.find(
-            (type) => type.requisition_type == requisition_types
-          ).stages,
-          "requisitionStages"
-        );
-        return this.REQUISITION_TYPES.find(
-          (type) => type.requisition_type == requisition_types
-        ).stages;
-      } else {
-        return [];
-      }
-    },
     showInformativeMessage() {
       this.snackbar.snackbar = true;
     },
     closeInformativeMessage() {
       this.snackbar.snackbar = false;
+    },
+    openRequisition(requisition) {
+      this.editedIndex = this.REQUISITIONS.indexOf(requisition);
+      this.editedItem = Object.assign({}, requisition);
+      this.dialogOpen = true;
+    },
+    closeRequisitionModalWindow() {
+      this.dialogOpen = false;
     },
   },
   computed: {
