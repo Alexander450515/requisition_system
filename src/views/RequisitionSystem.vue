@@ -27,6 +27,7 @@
         <!-- Открыть (для визирования)-->
         <v-btn
           v-if="item.status == 'Передана на визирование'"
+          :color="havePermission ? 'success' : 'grey'"
           small
           rounded
           dark
@@ -52,6 +53,7 @@
               :currentStep="currentStep"
               :lastComplitedStage="lastComplitedStage"
               :currentStageName="currentStageName"
+              :havePermission="havePermission"
               @closeRequisitionModalWindow="closeRequisitionModalWindow"
               @openRequisition="openRequisition"
               @showInformativeMessage="showInformativeMessage"
@@ -188,6 +190,15 @@ export default {
     },
     lastComplitedStage() {
       return this.currentRequisitionStages[this.currentStep - 1];
+    },
+    havePermission() {
+      let permissions = this.CURRENT_USER_PERMISSIONS;
+      if (permissions != undefined) {
+        return permissions.indexOf(this.currentStageName) != -1;
+        // console.log(result, "isAvaliable");
+      } else {
+        return false;
+      }
     },
   },
 };

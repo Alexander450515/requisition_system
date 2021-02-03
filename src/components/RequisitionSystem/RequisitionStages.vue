@@ -57,16 +57,11 @@ export default {
     currentStep: Number,
     lastComplitedStage: String,
     currentStageName: String,
+    havePermission: Boolean,
   },
   data: () => ({}),
   computed: {
     ...mapGetters(["CURRENT_USER_PERMISSIONS"]),
-    havePermission() {
-      let result =
-        this.CURRENT_USER_PERMISSIONS.indexOf(this.currentStageName) != -1;
-      console.log(result, "isAvaliable");
-      return result;
-    },
   },
   methods: {
     accept(step) {

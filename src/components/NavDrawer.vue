@@ -18,6 +18,9 @@
         <v-list-item-subtitle v-else>
           Нет доступных этапов визирования
         </v-list-item-subtitle>
+        <!-- <v-list-item-subtitle>
+          {{ this.CURRENT_USER }}
+        </v-list-item-subtitle> -->
         <div>
           <v-chip
             class="ma-2 "

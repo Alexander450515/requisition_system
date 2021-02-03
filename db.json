@@ -65,10 +65,10 @@
     {
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
-      "current_step": 4,
+      "current_step": 5,
       "create_date": "04.02.2021, 01:17:22",
-      "status": "Утверждена",
-      "last_complited_stage": "Инструктаж ТБ",
+      "status": "Принята к исполнению",
+      "last_complited_stage": "Передача в БП",
       "current_stage": "Передача в БП",
       "id": 1
     },
@@ -81,6 +81,46 @@
       "last_complited_stage": "Первоначальное рассмотрение",
       "current_stage": "Инструктаж ТБ",
       "id": 2
+    },
+    {
+      "requisition_creator": "Администратор",
+      "requisition_type": "Постоянный",
+      "current_step": 2,
+      "create_date": "04.02.2021, 01:53:32",
+      "status": "Передана на визирование",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
+      "id": 3
+    },
+    {
+      "requisition_creator": "Администратор",
+      "requisition_type": "Постоянный",
+      "current_step": 2,
+      "create_date": "04.02.2021, 01:53:48",
+      "status": "Передана на визирование",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
+      "id": 4
+    },
+    {
+      "requisition_creator": "Администратор",
+      "requisition_type": "Постоянный",
+      "current_step": 1,
+      "create_date": "04.02.2021, 01:58:26",
+      "status": "Передана на визирование",
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 5
+    },
+    {
+      "requisition_creator": "Администратор",
+      "requisition_type": "Временный",
+      "current_step": 2,
+      "create_date": "04.02.2021, 01:58:49",
+      "status": "Передана на визирование",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Инструктаж ТБ",
+      "id": 6
     }
   ],
   "requisitions_history": [
@@ -164,6 +204,113 @@
       "last_complited_stage": "Инструктаж ТБ",
       "current_stage": "Передача в БП",
       "id": 9
+    },
+    {
+      "date": "04.02.2021, 01:40:41",
+      "status": "Принята к исполнению",
+      "user": "Администратор",
+      "requisition_id": 1,
+      "last_complited_stage": "Передача в БП",
+      "id": 10
+    },
+    {
+      "date": "04.02.2021, 01:53:32",
+      "status": "Создана",
+      "user": "Администратор",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "",
+      "id": 11
+    },
+    {
+      "date": "04.02.2021, 01:53:33",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 12
+    },
+    {
+      "date": "04.02.2021, 01:53:36",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 3,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
+      "id": 13
+    },
+    {
+      "date": "04.02.2021, 01:53:48",
+      "status": "Создана",
+      "user": "Администратор",
+      "requisition_id": 4,
+      "last_complited_stage": "",
+      "current_stage": "",
+      "id": 14
+    },
+    {
+      "date": "04.02.2021, 01:53:49",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 4,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 15
+    },
+    {
+      "date": "04.02.2021, 01:53:51",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 4,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
+      "id": 16
+    },
+    {
+      "date": "04.02.2021, 01:58:26",
+      "status": "Создана",
+      "user": "Администратор",
+      "requisition_id": 5,
+      "last_complited_stage": "",
+      "current_stage": "",
+      "id": 17
+    },
+    {
+      "date": "04.02.2021, 01:58:27",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 5,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 18
+    },
+    {
+      "date": "04.02.2021, 01:58:49",
+      "status": "Создана",
+      "user": "Администратор",
+      "requisition_id": 6,
+      "last_complited_stage": "",
+      "current_stage": "",
+      "id": 19
+    },
+    {
+      "date": "04.02.2021, 01:58:51",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 6,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 20
+    },
+    {
+      "date": "04.02.2021, 02:00:18",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 6,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Инструктаж ТБ",
+      "id": 21
     }
   ]
 }
