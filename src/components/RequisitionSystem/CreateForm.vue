@@ -34,10 +34,10 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="$emit('closeModalWindow')">
-          Cancel
+          Отмена
         </v-btn>
         <v-btn type="submit" text :disabled="!valid" :outlined="!valid">
-          Save
+          Подать заявку
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -74,10 +74,6 @@ export default {
         this.$store.dispatch("CREATE_REQUISITION", requisition);
         this.$emit("closeModalWindow");
       }
-      console.log("submitHandler");
-    },
-    resetForm() {
-      this.$refs.form.reset();
     },
   },
   computed: {

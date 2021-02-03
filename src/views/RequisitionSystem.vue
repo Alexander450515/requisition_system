@@ -24,16 +24,26 @@
         >
           Передать на визирование
         </v-btn>
-        <!-- Открыть -->
+        <!-- Открыть (для визирования)-->
         <v-btn
           v-if="item.status == 'Передана на визирование'"
-          color="success"
           small
           rounded
           dark
           @click="openRequisition(item)"
         >
           Открыть
+        </v-btn>
+        <!-- Передать к исполнению -->
+        <v-btn
+          v-if="item.status == 'Утверждена'"
+          color="success"
+          small
+          rounded
+          dark
+          @click="openRequisition(item)"
+        >
+          Передать к исполнению
         </v-btn>
         <v-dialog v-model="dialogOpen" max-width="1200px" :retain-focus="false">
           <div class="white">
@@ -52,7 +62,6 @@
       <template v-slot:expanded-item="{ headers, item }">
         <td :colspan="headers.length">
           <strong>Последнее действие:</strong>
-          <!-- {{ lastEvent(item) }} -->
           {{
             `${lastEvent(item).user} изменил статус заявки на "${
               lastEvent(item).status
@@ -71,7 +80,6 @@
       :currentStep="currentStep"
       @closeInformativeMessage="closeInformativeMessage"
     />
-    <v-btn @click="showInformativeMessage">showInformativeMessage</v-btn>
   </div>
 </template>
 
@@ -90,7 +98,7 @@ export default {
     snackbar: { snackbar: false },
     headers: [
       { text: "№", value: "id" },
-      { text: "Статус", value: "status" },
+      { text: "Статус", value: "status", width: 250 },
       { text: "Этап заявки", value: "current_stage", width: 300 },
       { text: "Время создания", value: "create_date" },
       { text: "Заявитель", value: "requisition_creator" },
@@ -141,8 +149,6 @@ export default {
     },
     sendToAgreement(requisition) {
       this.editedItem = Object.assign({}, requisition);
-      console.log(this.currentStageName, "currentStageName");
-      console.log(this.lastComplitedStage, "lastComplitedStage");
       return this.$store.dispatch("CHANGE_STAGE", {
         id: requisition.id,
         current_stage: this.currentStageName,
@@ -175,7 +181,6 @@ export default {
       }
     },
     currentStep() {
-      console.log(this.editedItem.current_step, "this.editedItem.current_step");
       return this.editedItem.current_step;
     },
     currentStageName() {

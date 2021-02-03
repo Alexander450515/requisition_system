@@ -27,7 +27,11 @@
           Согласовать
         </v-btn>
 
-        <v-btn text @click="$emit('closeRequisitionModalWindow')">
+        <v-btn class="ml-2" color="error" @click="reject(index + 1)">
+          Отклонить
+        </v-btn>
+
+        <v-btn class="ml-2" text @click="$emit('closeRequisitionModalWindow')">
           Закрыть
         </v-btn>
       </v-stepper-content>
@@ -61,15 +65,33 @@ export default {
         current_stage: this.currentStageName,
       };
 
-      if (step < this.currentRequisitionStages.length) {
+      if (step < this.currentRequisitionStages.length - 1) {
         updatedRequisition.status = "Передана на визирование";
         this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
       }
-      // Последний этап для отправления заявки в БП (Принята к исполнению)
+      // Утверждена (все сотрудники производящие визирование заявки утвердили ее)
+      else if (step == this.currentRequisitionStages.length - 1) {
+        (updatedRequisition.status = "Утверждена"),
+          this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
+      }
+      // Принята к исполнению (получена непосредственно в БП,
+      // произведено действие, например выдан пропуск)
       else if (step == this.currentRequisitionStages.length) {
         (updatedRequisition.status = "Принята к исполнению"),
           this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
       }
+      this.$emit("closeRequisitionModalWindow");
+      this.$emit("showInformativeMessage");
+    },
+    reject() {
+      let updatedRequisition = {
+        id: this.editedItem.id,
+        current_step: this.currentStep,
+        status: "Отклонена",
+        last_complited_stage: this.lastComplitedStage,
+        current_stage: this.currentStageName,
+      };
+      this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
       this.$emit("closeRequisitionModalWindow");
       this.$emit("showInformativeMessage");
     },
