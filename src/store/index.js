@@ -177,7 +177,6 @@ export default new Vuex.Store({
           }
         );
         if (response.status == 200) {
-          console.log(`CHANGE_STAGE ${response.status}`);
           // await dispatch("GET_REQUISITIONS");
           await dispatch("CREATE_EVENT", {
             current_step: this.currentStep,

@@ -24,11 +24,11 @@
         :step="index + 1"
       >
         <v-btn color="success" @click="nextStep(index + 1)">
-          Continue
+          Согласовать
         </v-btn>
 
         <v-btn text @click="$emit('closeRequisitionModalWindow')">
-          Cancel
+          Закрыть
         </v-btn>
       </v-stepper-content>
     </v-stepper-items>
@@ -46,26 +46,41 @@ export default {
   data: () => ({}),
   computed: {
     ...mapGetters(["CURRENT_USER_PERMISSIONS"]),
+    lastComplitedStage() {
+      return this.currentRequisitionStages[this.currentStep - 2];
+    },
+    currentStage() {
+      return this.currentRequisitionStages[this.currentStep - 1];
+    },
   },
   methods: {
     nextStep(step) {
-      if (step < this.currentRequisitionStages.length) {
-        let currentStep = this.editedItem.current_step + 1;
-        let lastComplitedStage = this.currentRequisitionStages[currentStep - 2];
-        let currentStage = this.currentRequisitionStages[currentStep - 1];
-        console.log(`currentStep ${currentStep}`);
-        console.log(`Этап "${lastComplitedStage}" пройден`);
-        console.log(currentStage, "- текущий этап");
-        let id = this.editedItem.id;
+      let id = this.editedItem.id;
+      if (
+        step < this.currentRequisitionStages.length &&
+        this.currentStage != "Передача в БП"
+      ) {
+        // console.log(`currentStep ${currentStep}`);
+        // console.log(`Этап "${lastComplitedStage}" пройден`);
+        // console.log(currentStage, "- текущий этап");
         this.$store.dispatch("CHANGE_STAGE", {
-          current_step: currentStep,
+          current_step: this.currentStep,
           id: id,
-          last_complited_stage: lastComplitedStage,
-          current_stage: currentStage,
+          last_complited_stage: this.lastComplitedStage,
+          current_stage: this.currentStage,
         });
         this.$emit("closeRequisitionModalWindow");
         this.$emit("showInformativeMessage");
-        // Тут нужно добавить время и этап визирования в историю
+      } else if (this.currentStage == "Передача в БП") {
+        this.$store.dispatch("CHANGE_STAGE", {
+          current_step: this.currentStep,
+          id: id,
+          last_complited_stage: this.lastComplitedStage,
+          current_stage: this.currentStage,
+          status: "Создана",
+        });
+        this.$emit("closeRequisitionModalWindow");
+        this.$emit("showInformativeMessage");
       }
     },
   },
