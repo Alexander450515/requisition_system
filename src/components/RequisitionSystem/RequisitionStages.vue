@@ -23,11 +23,20 @@
         :key="`${index}-content`"
         :step="index + 1"
       >
-        <v-btn color="success" @click="accept(index + 1)">
+        <v-btn
+          :disabled="!havePermission"
+          color="success"
+          @click="accept(index + 1)"
+        >
           Согласовать
         </v-btn>
 
-        <v-btn class="ml-2" color="error" @click="reject(index + 1)">
+        <v-btn
+          :disabled="!havePermission"
+          class="ml-2"
+          color="error"
+          @click="reject(index + 1)"
+        >
           Отклонить
         </v-btn>
 
@@ -47,12 +56,16 @@ export default {
     currentRequisitionStages: Array,
     currentStep: Number,
     lastComplitedStage: String,
+    currentStageName: String,
   },
   data: () => ({}),
   computed: {
     ...mapGetters(["CURRENT_USER_PERMISSIONS"]),
-    currentStageName() {
-      return this.currentRequisitionStages[this.currentStep];
+    havePermission() {
+      let result =
+        this.CURRENT_USER_PERMISSIONS.indexOf(this.currentStageName) != -1;
+      console.log(result, "isAvaliable");
+      return result;
     },
   },
   methods: {
@@ -62,7 +75,7 @@ export default {
         current_step: this.currentStep + 1,
         status: "",
         last_complited_stage: this.lastComplitedStage,
-        current_stage: this.currentStageName,
+        current_stage: this.currentRequisitionStages[this.currentStep],
       };
 
       if (step < this.currentRequisitionStages.length - 1) {

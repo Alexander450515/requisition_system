@@ -37,7 +37,6 @@
         <!-- Передать к исполнению -->
         <v-btn
           v-if="item.status == 'Утверждена'"
-          color="success"
           small
           rounded
           dark
@@ -52,6 +51,7 @@
               :currentRequisitionStages="currentRequisitionStages"
               :currentStep="currentStep"
               :lastComplitedStage="lastComplitedStage"
+              :currentStageName="currentStageName"
               @closeRequisitionModalWindow="closeRequisitionModalWindow"
               @openRequisition="openRequisition"
               @showInformativeMessage="showInformativeMessage"
@@ -109,21 +109,6 @@ export default {
     editedItem: {},
   }),
   methods: {
-    // color(item) {
-    //   return (
-    //     this.CURRENT_USER_PERMISSIONS.indexOf(requisitionStages(item)) != -1
-    //   );
-    // },
-    // requisitionStages(requisition) {
-    //   let requisition_types = requisition.requisition_type;
-    //   if (requisition_types != undefined) {
-    //     return this.REQUISITION_TYPES.find(
-    //       (type) => type.requisition_type == requisition_types
-    //     ).stages;
-    //   } else {
-    //     return [];
-    //   }
-    // },
     lastEvent(requisition) {
       let events = this.arrayOfAllEventsOfSelectedRequisition(requisition);
       let arrayOfIds = events.map((event) => event.id);

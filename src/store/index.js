@@ -9,7 +9,7 @@ export default new Vuex.Store({
     users: [],
     requisition_types: [],
     requisitions: [],
-    selectedUser: "",
+    selectedUser: JSON.parse(localStorage.getItem("selected_user")),
     requisitions_history: [],
   },
   mutations: {
@@ -27,6 +27,7 @@ export default new Vuex.Store({
     },
     SET_SELECTED_USER: (state, selectedUser) => {
       state.selectedUser = selectedUser;
+      localStorage.setItem("selected_user", JSON.stringify(state.selectedUser));
     },
   },
 

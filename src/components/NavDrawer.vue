@@ -7,7 +7,6 @@
           label="Выбрать пользователя"
           dense
           outlined
-          clearable
           v-model="currentUser"
           @input="selectedUser"
           :error="!currentUser"
