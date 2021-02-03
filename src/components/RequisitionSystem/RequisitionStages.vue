@@ -42,46 +42,41 @@ export default {
     editedItem: Object,
     currentRequisitionStages: Array,
     currentStep: Number,
+    currentStageName: String,
   },
   data: () => ({}),
   computed: {
     ...mapGetters(["CURRENT_USER_PERMISSIONS"]),
     lastComplitedStage() {
-      return this.currentRequisitionStages[this.currentStep - 2];
-    },
-    currentStage() {
       return this.currentRequisitionStages[this.currentStep - 1];
     },
   },
   methods: {
     nextStep(step) {
       let id = this.editedItem.id;
-      if (
-        step < this.currentRequisitionStages.length &&
-        this.currentStage != "Передача в БП"
-      ) {
+      if (step < this.currentRequisitionStages.length) {
         // console.log(`currentStep ${currentStep}`);
-        // console.log(`Этап "${lastComplitedStage}" пройден`);
-        // console.log(currentStage, "- текущий этап");
+        console.log(`Этап "${this.lastComplitedStage}" пройден`);
+        console.log(this.currentStageName, "- текущий этап");
         this.$store.dispatch("CHANGE_STAGE", {
-          current_step: this.currentStep,
           id: id,
+          current_step: this.currentStep + 1,
           last_complited_stage: this.lastComplitedStage,
-          current_stage: this.currentStage,
-        });
-        this.$emit("closeRequisitionModalWindow");
-        this.$emit("showInformativeMessage");
-      } else if (this.currentStage == "Передача в БП") {
-        this.$store.dispatch("CHANGE_STAGE", {
-          current_step: this.currentStep,
-          id: id,
-          last_complited_stage: this.lastComplitedStage,
-          current_stage: this.currentStage,
-          status: "Создана",
+          current_stage: this.currentStageName,
         });
         this.$emit("closeRequisitionModalWindow");
         this.$emit("showInformativeMessage");
       }
+      // else if (step == this.currentRequisitionStages.length) {
+      //   this.$store.dispatch("CHANGE_STAGE", {
+      // id: id,
+      // current_step: this.currentStep + 1,
+      // last_complited_stage: this.lastComplitedStage,
+      // current_stage: this.currentStageName,
+      //   });
+      //   this.$emit("closeRequisitionModalWindow");
+      //   this.$emit("showInformativeMessage");
+      // }
     },
   },
 };

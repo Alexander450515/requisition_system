@@ -6,7 +6,6 @@
       :items-per-page="10"
       :expanded.sync="expanded"
       show-expand
-      sort-by="id"
       :search="search.search"
       calculate-widths
     >
@@ -26,7 +25,7 @@
         >
           Передать на визирование
         </v-btn>
-        <!-- open -->
+        <!-- Открыть -->
         <v-btn
           v-if="item.status == 'Передана на визирование'"
           color="success"
@@ -43,6 +42,7 @@
               :editedItem="editedItem"
               :currentRequisitionStages="currentRequisitionStages"
               :currentStep="currentStep"
+              :currentStageName="currentStageName"
               @closeRequisitionModalWindow="closeRequisitionModalWindow"
               @openRequisition="openRequisition"
               @showInformativeMessage="showInformativeMessage"
@@ -57,7 +57,11 @@
           {{
             `${lastEvent(item).user} изменил статус заявки на "${
               lastEvent(item).status
-            }" ${lastEvent(item).date}`
+            }" ${lastEvent(item).date}. Текущий этап визирования: ${
+              lastEvent(item).current_stage != ""
+                ? lastEvent(item).current_stage
+                : '"Визирование еще не началось"'
+            }`
           }}
         </td>
       </template>
@@ -88,6 +92,7 @@ export default {
     headers: [
       { text: "№", value: "id" },
       { text: "Статус", value: "status" },
+      { text: "Тип заявки", value: "current_stage" },
       { text: "Время создания", value: "create_date" },
       { text: "Заявитель", value: "requisition_creator" },
       { text: "Тип заявки", value: "requisition_type" },
@@ -111,6 +116,8 @@ export default {
           requisition_id: 0,
           user: "",
           id: 0,
+          last_complited_stage: "",
+          current_stage: "",
         };
       } else {
         return lastEvent;
@@ -121,7 +128,6 @@ export default {
         return event.requisition_id == requisition.id;
       });
       if (arr != undefined) {
-        // console.log(arr, "arr");
         return arr;
       }
     },
@@ -136,15 +142,10 @@ export default {
     },
     sendToAgreement(requisition) {
       this.editedItem = Object.assign({}, requisition);
-      let currentStep = this.editedItem.current_step + 1;
-      let currentStage = this.currentRequisitionStages[currentStep - 2];
-      console.log(this.editedItem, "editedItem");
-      console.log(currentStep, "currentStep");
-      console.log(currentStage, "currentStage");
+      console.log(this.currentStageName, "currentStageName");
       return this.$store.dispatch("TO_AGREEMENT", {
         id: requisition.id,
-        current_stage: currentStage,
-        // currentStage отправляет не то. Здесь нужно поправить
+        current_stage: this.currentStageName,
       });
     },
     showInformativeMessage() {
@@ -164,14 +165,18 @@ export default {
       let editedItem = this.editedItem.requisition_type;
       if (editedItem != undefined) {
         return this.REQUISITION_TYPES.find(
-          (type) => type.requisition_type == this.editedItem.requisition_type
+          (type) => type.requisition_type == editedItem
         ).stages;
       } else {
         return [];
       }
     },
     currentStep() {
+      console.log(this.editedItem.current_step, "this.editedItem.current_step");
       return this.editedItem.current_step;
+    },
+    currentStageName() {
+      return this.currentRequisitionStages[this.currentStep];
     },
   },
 };
