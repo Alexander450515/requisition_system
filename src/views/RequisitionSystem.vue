@@ -52,10 +52,8 @@
               :currentRequisitionStages="currentRequisitionStages"
               :currentStep="currentStep"
               :lastComplitedStage="lastComplitedStage"
-              :currentStageName="currentStageName"
               :havePermission="havePermission"
               @closeRequisitionModalWindow="closeRequisitionModalWindow"
-              @openRequisition="openRequisition"
               @showInformativeMessage="showInformativeMessage"
             />
           </div>
@@ -186,6 +184,10 @@ export default {
       return this.editedItem.current_step;
     },
     currentStageName() {
+      console.log(
+        this.currentRequisitionStages[this.currentStep - 1],
+        "currentStageName"
+      );
       return this.currentRequisitionStages[this.currentStep - 1];
     },
     lastComplitedStage() {

@@ -4,7 +4,7 @@
       v-model="snackbarBoolean"
       :timeout="timeout"
       right
-      style="max-width: 500px;"
+      style="max-width: 650px;"
     >
       {{
         `Этап визирования "${
@@ -36,7 +36,7 @@ export default {
     currentStep: Number,
   },
   data: () => ({
-    timeout: 2000,
+    timeout: 3000,
     date: new Date().toLocaleString(),
   }),
   computed: {

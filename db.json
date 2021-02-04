@@ -65,47 +65,27 @@
     {
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
-      "current_step": 3,
-      "create_date": "04.02.2021, 11:26:12",
-      "status": "Передана на визирование",
-      "last_complited_stage": "Проверка отделом безопасности",
-      "current_stage": "Инструктаж ТБ",
+      "current_step": 2,
+      "create_date": "04.02.2021, 22:44:32",
+      "status": "Отклонена",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
       "id": 1
     },
     {
       "requisition_creator": "Администратор",
-      "requisition_type": "Временный",
-      "current_step": 2,
-      "create_date": "04.02.2021, 11:30:08",
-      "status": "Отклонена",
-      "last_complited_stage": "Инструктаж ТБ",
-      "current_stage": "Инструктаж ТБ",
-      "id": 2
-    },
-    {
-      "requisition_creator": "Специалист по безопасности",
-      "requisition_type": "Одноразовый",
-      "current_step": 3,
-      "create_date": "04.02.2021, 11:33:21",
-      "status": "Принята к исполнению",
-      "last_complited_stage": "Передача в БП",
-      "current_stage": "Передача в БП",
-      "id": 3
-    },
-    {
-      "requisition_creator": "Оператор",
       "requisition_type": "Постоянный",
-      "current_step": 4,
-      "create_date": "04.02.2021, 12:07:50",
-      "status": "Утверждена",
-      "last_complited_stage": "Инструктаж ТБ",
-      "current_stage": "Передача в БП",
-      "id": 4
+      "current_step": 1,
+      "create_date": "04.02.2021, 22:45:30",
+      "status": "Передана на визирование",
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 2
     }
   ],
   "requisitions_history": [
     {
-      "date": "04.02.2021, 11:26:13",
+      "date": "04.02.2021, 22:44:32",
       "status": "Создана",
       "user": "Администратор",
       "requisition_id": 1,
@@ -114,7 +94,7 @@
       "id": 1
     },
     {
-      "date": "04.02.2021, 11:26:23",
+      "date": "04.02.2021, 22:44:33",
       "status": "Передана на визирование",
       "user": "Администратор",
       "requisition_id": 1,
@@ -123,7 +103,7 @@
       "id": 2
     },
     {
-      "date": "04.02.2021, 11:26:32",
+      "date": "04.02.2021, 22:44:37",
       "status": "Передана на визирование",
       "user": "Администратор",
       "requisition_id": 1,
@@ -132,129 +112,40 @@
       "id": 3
     },
     {
-      "date": "04.02.2021, 11:27:23",
+      "date": "04.02.2021, 22:44:38",
       "status": "Передана на визирование",
-      "user": "Специалист по безопасности",
+      "user": "Администратор",
       "requisition_id": 1,
-      "last_complited_stage": "Проверка отделом безопасности",
-      "current_stage": "Инструктаж ТБ",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
       "id": 4
     },
     {
-      "date": "04.02.2021, 11:30:08",
-      "status": "Создана",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "",
-      "current_stage": "",
+      "date": "04.02.2021, 22:44:44",
+      "status": "Отклонена",
+      "user": "Специалист по безопасности",
+      "requisition_id": 1,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
       "id": 5
     },
     {
-      "date": "04.02.2021, 11:30:42",
-      "status": "Передана на визирование",
+      "date": "04.02.2021, 22:45:30",
+      "status": "Создана",
       "user": "Администратор",
       "requisition_id": 2,
       "last_complited_stage": "",
-      "current_stage": "Первоначальное рассмотрение",
+      "current_stage": "",
       "id": 6
     },
     {
-      "date": "04.02.2021, 11:30:46",
+      "date": "04.02.2021, 22:46:36",
       "status": "Передана на визирование",
       "user": "Администратор",
       "requisition_id": 2,
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Инструктаж ТБ",
-      "id": 7
-    },
-    {
-      "date": "04.02.2021, 11:32:59",
-      "status": "Отклонена",
-      "user": "Специалист по безопасности",
-      "requisition_id": 2,
-      "last_complited_stage": "Инструктаж ТБ",
-      "current_stage": "Инструктаж ТБ",
-      "id": 8
-    },
-    {
-      "date": "04.02.2021, 11:33:21",
-      "status": "Создана",
-      "user": "Специалист по безопасности",
-      "requisition_id": 3,
-      "last_complited_stage": "",
-      "current_stage": "",
-      "id": 9
-    },
-    {
-      "date": "04.02.2021, 11:33:23",
-      "status": "Передана на визирование",
-      "user": "Специалист по безопасности",
-      "requisition_id": 3,
-      "last_complited_stage": "",
-      "current_stage": "Инструктаж ТБ",
-      "id": 10
-    },
-    {
-      "date": "04.02.2021, 11:33:27",
-      "status": "Утверждена",
-      "user": "Специалист по безопасности",
-      "requisition_id": 3,
-      "last_complited_stage": "Инструктаж ТБ",
-      "current_stage": "Передача в БП",
-      "id": 11
-    },
-    {
-      "date": "04.02.2021, 11:33:37",
-      "status": "Принята к исполнению",
-      "user": "Охраник",
-      "requisition_id": 3,
-      "last_complited_stage": "Передача в БП",
-      "id": 12
-    },
-    {
-      "date": "04.02.2021, 12:07:50",
-      "status": "Создана",
-      "user": "Оператор",
-      "requisition_id": 4,
-      "last_complited_stage": "",
-      "current_stage": "",
-      "id": 13
-    },
-    {
-      "date": "04.02.2021, 12:07:57",
-      "status": "Передана на визирование",
-      "user": "Оператор",
-      "requisition_id": 4,
       "last_complited_stage": "",
       "current_stage": "Первоначальное рассмотрение",
-      "id": 14
-    },
-    {
-      "date": "04.02.2021, 12:08:07",
-      "status": "Передана на визирование",
-      "user": "Оператор",
-      "requisition_id": 4,
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
-      "id": 15
-    },
-    {
-      "date": "04.02.2021, 12:08:49",
-      "status": "Передана на визирование",
-      "user": "Специалист по безопасности",
-      "requisition_id": 4,
-      "last_complited_stage": "Проверка отделом безопасности",
-      "current_stage": "Инструктаж ТБ",
-      "id": 16
-    },
-    {
-      "date": "04.02.2021, 12:09:05",
-      "status": "Утверждена",
-      "user": "Оператор",
-      "requisition_id": 4,
-      "last_complited_stage": "Инструктаж ТБ",
-      "current_stage": "Передача в БП",
-      "id": 17
+      "id": 7
     }
   ]
 }

@@ -56,7 +56,6 @@ export default {
     currentRequisitionStages: Array,
     currentStep: Number,
     lastComplitedStage: String,
-    currentStageName: String,
     havePermission: Boolean,
   },
   data: () => ({}),
@@ -96,8 +95,10 @@ export default {
         id: this.editedItem.id,
         current_step: this.currentStep,
         status: "Отклонена",
-        last_complited_stage: this.lastComplitedStage,
-        current_stage: this.currentStageName,
+        last_complited_stage: this.currentRequisitionStages[
+          this.currentStep - 2
+        ],
+        current_stage: this.currentRequisitionStages[this.currentStep - 1],
       };
       this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
       this.$emit("closeRequisitionModalWindow");

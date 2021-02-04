@@ -46,6 +46,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+
 export default {
   name: "CreateForm",
 
@@ -73,6 +74,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.$store.dispatch("CREATE_REQUISITION", requisition);
         this.$emit("closeModalWindow");
+        this.$emit("showInformativeMessage");
       }
     },
   },
