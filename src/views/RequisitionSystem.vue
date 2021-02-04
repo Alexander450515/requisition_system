@@ -119,13 +119,13 @@ export default {
       }
     },
     sendToAgreement(requisition) {
-      // this.editedItem = Object.assign({}, requisition);
+      this.editedItem = Object.assign({}, requisition);
       return this.$store.dispatch("CHANGE_STAGE", {
         id: requisition.id,
-        current_stage: this.currentStageName,
+        current_stage: this.lastComplitedStage,
         status: "Передана на визирование",
         last_complited_stage: "",
-        current_step: this.currentStep,
+        current_step: 1,
         requisition_type: requisition.requisition_type,
       });
     },
@@ -164,16 +164,16 @@ export default {
     currentStep() {
       return this.editedItem.current_step;
     },
-    currentStageName() {
-      return this.currentRequisitionStages[this.currentStep - 1];
-    },
+    // currentStageName() {
+    //   return this.currentRequisitionStages[this.currentStep - 1];
+    // },
     lastComplitedStage() {
       return this.currentRequisitionStages[this.currentStep - 1];
     },
     havePermission() {
       let permissions = this.CURRENT_USER_PERMISSIONS;
       if (permissions != undefined) {
-        return permissions.indexOf(this.currentStageName) != -1;
+        return permissions.indexOf(this.lastComplitedStage) != -1;
       } else {
         return false;
       }

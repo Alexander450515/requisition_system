@@ -63,21 +63,21 @@
   ],
   "requisitions": [
     {
-      "requisition_creator": "Оператор",
+      "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
-      "current_step": 1,
-      "create_date": "05.02.2021, 01:10:20",
+      "current_step": 2,
+      "create_date": "05.02.2021, 01:19:19",
       "status": "Передана на визирование",
-      "last_complited_stage": "",
-      "current_stage": "",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
       "id": 1
     }
   ],
   "requisitions_history": [
     {
-      "date": "05.02.2021, 01:10:20",
+      "date": "05.02.2021, 01:19:19",
       "status": "Создана",
-      "user": "Оператор",
+      "user": "Администратор",
       "requisition_id": 1,
       "last_complited_stage": "",
       "current_stage": "",
@@ -85,13 +85,24 @@
       "id": 1
     },
     {
-      "date": "05.02.2021, 01:10:25",
+      "date": "05.02.2021, 01:19:23",
       "status": "Передана на визирование",
-      "user": "Оператор",
+      "user": "Администратор",
       "requisition_id": 1,
       "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
       "requisition_type": "Постоянный",
       "id": 2
+    },
+    {
+      "date": "05.02.2021, 01:19:38",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 1,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
+      "requisition_type": "Постоянный",
+      "id": 3
     }
   ]
 }
