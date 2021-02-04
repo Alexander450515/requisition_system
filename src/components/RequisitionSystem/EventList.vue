@@ -28,14 +28,14 @@
 
 <script>
 export default {
-  props: {
-    allEventsOfSelectedRequisition: Function,
-  },
-  computed: {
-    test() {
-      console.log(this.allEventsOfSelectedRequisition, "allEvents");
-      return this.allEventsOfSelectedRequisition;
-    },
-  },
+  //   props: {
+  //     allEventsOfSelectedRequisition: Function,
+  //   },
+  //   computed: {
+  //     test() {
+  //       console.log(this.allEventsOfSelectedRequisition, "allEvents");
+  //       return this.allEventsOfSelectedRequisition;
+  //     },
+  //   },
 };
 </script>

@@ -12,14 +12,15 @@
         }".`
       }}
     </div>
-    <div class="d-inline">
-      <!--  -->
+    <div class="d-inline mr-10">
       <v-dialog v-model="dialog" max-width="500px">
-        <v-btn class="mr-10" small rounded text>
-          Посмотреть список всех действийявку
-        </v-btn>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn small rounded text v-bind="attrs" v-on="on">
+            Посмотреть список всех действий
+          </v-btn>
+        </template>
         <div class="white">
-          <EventList />
+          <EventList @closeModalWindow="closeModalWindow" />
         </div>
       </v-dialog>
     </div>
@@ -42,9 +43,6 @@ export default {
   methods: {
     closeModalWindow() {
       this.dialog = false;
-    },
-    checkAllEvents() {
-      this.dialog = true;
     },
   },
 };
