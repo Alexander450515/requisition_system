@@ -38,7 +38,7 @@
           <ExpandedInfo
             :item="item"
             :lastEvent="lastEvent"
-            @allEventsOfSelectedRequisition="
+            :allEventsOfSelectedRequisition="
               allEventsOfSelectedRequisition(item)
             "
           />
@@ -119,13 +119,14 @@ export default {
       }
     },
     sendToAgreement(requisition) {
-      this.editedItem = Object.assign({}, requisition);
+      // this.editedItem = Object.assign({}, requisition);
       return this.$store.dispatch("CHANGE_STAGE", {
         id: requisition.id,
         current_stage: this.currentStageName,
         status: "Передана на визирование",
         last_complited_stage: "",
         current_step: this.currentStep,
+        requisition_type: requisition.requisition_type,
       });
     },
     showInformativeMessage() {

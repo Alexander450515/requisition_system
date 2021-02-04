@@ -20,7 +20,10 @@
           </v-btn>
         </template>
         <div class="white">
-          <EventList @closeModalWindow="closeModalWindow" />
+          <EventList
+            @closeModalWindow="closeModalWindow"
+            :allEventsOfSelectedRequisition="allEventsOfSelectedRequisition"
+          />
         </div>
       </v-dialog>
     </div>
@@ -36,6 +39,7 @@ export default {
   props: {
     item: Object,
     lastEvent: Function,
+    allEventsOfSelectedRequisition: Array,
   },
   data: () => ({
     dialog: false,

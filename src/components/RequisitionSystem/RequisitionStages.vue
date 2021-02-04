@@ -70,6 +70,7 @@ export default {
         status: "",
         last_complited_stage: this.lastComplitedStage,
         current_stage: this.currentRequisitionStages[this.currentStep],
+        requisition_type: this.editedItem.requisition_type,
       };
 
       if (step < this.currentRequisitionStages.length - 1) {

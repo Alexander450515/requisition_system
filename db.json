@@ -63,80 +63,35 @@
   ],
   "requisitions": [
     {
-      "requisition_creator": "Администратор",
+      "requisition_creator": "Оператор",
       "requisition_type": "Постоянный",
-      "current_step": 2,
-      "create_date": "04.02.2021, 23:46:05",
+      "current_step": 1,
+      "create_date": "05.02.2021, 01:10:20",
       "status": "Передана на визирование",
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
+      "last_complited_stage": "",
+      "current_stage": "",
       "id": 1
-    },
-    {
-      "requisition_creator": "Специалист по безопасности",
-      "requisition_type": "Постоянный",
-      "current_step": 2,
-      "create_date": "04.02.2021, 23:52:33",
-      "status": "Передана на визирование",
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
-      "id": 2
     }
   ],
   "requisitions_history": [
     {
-      "date": "04.02.2021, 23:46:05",
+      "date": "05.02.2021, 01:10:20",
       "status": "Создана",
-      "user": "Администратор",
+      "user": "Оператор",
       "requisition_id": 1,
       "last_complited_stage": "",
       "current_stage": "",
+      "requisition_type": "Постоянный",
       "id": 1
     },
     {
-      "date": "04.02.2021, 23:46:11",
+      "date": "05.02.2021, 01:10:25",
       "status": "Передана на визирование",
-      "user": "Администратор",
+      "user": "Оператор",
       "requisition_id": 1,
       "last_complited_stage": "",
-      "current_stage": "Первоначальное рассмотрение",
+      "requisition_type": "Постоянный",
       "id": 2
-    },
-    {
-      "date": "04.02.2021, 23:47:01",
-      "status": "Передана на визирование",
-      "user": "Администратор",
-      "requisition_id": 1,
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
-      "id": 3
-    },
-    {
-      "date": "04.02.2021, 23:52:33",
-      "status": "Создана",
-      "user": "Специалист по безопасности",
-      "requisition_id": 2,
-      "last_complited_stage": "",
-      "current_stage": "",
-      "id": 4
-    },
-    {
-      "date": "04.02.2021, 23:52:35",
-      "status": "Передана на визирование",
-      "user": "Специалист по безопасности",
-      "requisition_id": 2,
-      "last_complited_stage": "",
-      "current_stage": "Первоначальное рассмотрение",
-      "id": 5
-    },
-    {
-      "date": "04.02.2021, 23:54:15",
-      "status": "Передана на визирование",
-      "user": "Администратор",
-      "requisition_id": 2,
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
-      "id": 6
     }
   ]
 }

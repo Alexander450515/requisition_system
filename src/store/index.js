@@ -100,6 +100,7 @@ export default new Vuex.Store({
           requisition_id: requisition_id,
           current_stage: current_stage,
           last_complited_stage: last_complited_stage,
+          requisition_type: requisition_type,
         });
       } catch (error) {
         console.log(error);
@@ -107,7 +108,14 @@ export default new Vuex.Store({
     },
     async CHANGE_STAGE(
       { dispatch },
-      { id, current_stage, last_complited_stage, status, current_step }
+      {
+        id,
+        current_stage,
+        last_complited_stage,
+        status,
+        current_step,
+        requisition_type,
+      }
     ) {
       try {
         const response = await axios.patch(
@@ -117,6 +125,7 @@ export default new Vuex.Store({
             current_step: current_step,
             last_complited_stage: last_complited_stage,
             current_stage: current_stage,
+            requisition_type: requisition_type,
           }
         );
         await dispatch("GET_REQUISITIONS");
@@ -126,6 +135,7 @@ export default new Vuex.Store({
             requisition_id: id,
             current_stage: current_stage,
             last_complited_stage: last_complited_stage,
+            requisition_type: requisition_type,
           });
         }
       } catch (error) {
@@ -134,7 +144,13 @@ export default new Vuex.Store({
     },
     async CREATE_EVENT(
       { dispatch, getters },
-      { status, requisition_id, current_stage, last_complited_stage }
+      {
+        status,
+        requisition_id,
+        current_stage,
+        last_complited_stage,
+        requisition_type,
+      }
     ) {
       try {
         await axios.post("http://localhost:3000/requisitions_history", {
@@ -144,6 +160,7 @@ export default new Vuex.Store({
           requisition_id: requisition_id,
           last_complited_stage: last_complited_stage,
           current_stage: current_stage,
+          requisition_type: requisition_type,
         });
         await dispatch("GET_REQUISITIONS");
         await dispatch("GET_REQUISITIONS_HISTORY");
