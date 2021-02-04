@@ -16,7 +16,7 @@
       <v-col class="d-flex justify-end">
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark v-bind="attrs" v-on="on">
+            <v-btn color="success" dark v-bind="attrs" v-on="on">
               Создать заявку
             </v-btn>
           </template>

@@ -13,38 +13,12 @@
       </template>
 
       <template v-slot:[`item.actions`]="{ item }">
-        <!-- Передать на визирование -->
-        <v-btn
-          v-if="item.status == 'Создана'"
-          color="success"
-          small
-          rounded
-          dark
-          @click="sendToAgreement(item)"
-        >
-          Передать на визирование
-        </v-btn>
-        <!-- Открыть (для визирования)-->
-        <v-btn
-          v-if="item.status == 'Передана на визирование'"
-          :color="havePermission ? 'success' : 'grey'"
-          small
-          rounded
-          dark
-          @click="openRequisition(item)"
-        >
-          Открыть
-        </v-btn>
-        <!-- Передать к исполнению -->
-        <v-btn
-          v-if="item.status == 'Утверждена'"
-          small
-          rounded
-          dark
-          @click="openRequisition(item)"
-        >
-          Передать к исполнению
-        </v-btn>
+        <ActionButtons
+          :item="item"
+          :havePermission="havePermission"
+          @sendToAgreement="sendToAgreement(item)"
+          @openRequisition="openRequisition(item)"
+        />
         <v-dialog v-model="dialogOpen" max-width="1200px" :retain-focus="false">
           <div class="white">
             <RequisitionStages
@@ -61,16 +35,13 @@
       </template>
       <template v-slot:expanded-item="{ headers, item }">
         <td :colspan="headers.length">
-          <strong>Последнее действие:</strong>
-          {{
-            `${lastEvent(item).user} изменил статус заявки на "${
-              lastEvent(item).status
-            }" ${lastEvent(item).date}. Текущий этап визирования: ${
-              lastEvent(item).current_stage != ""
-                ? lastEvent(item).current_stage
-                : '"Визирование еще не началось"'
-            }`
-          }}
+          <ExpandedInfo
+            :item="item"
+            :lastEvent="lastEvent"
+            @allEventsOfSelectedRequisition="
+              allEventsOfSelectedRequisition(item)
+            "
+          />
         </td>
       </template>
     </v-data-table>
@@ -87,10 +58,18 @@
 import TopTable from "@/components/RequisitionSystem/TopTable";
 import RequisitionStages from "@/components/RequisitionSystem/RequisitionStages";
 import InformativeMessage from "@/components/RequisitionSystem/InformativeMessage";
+import ActionButtons from "@/components/RequisitionSystem/ActionButtons";
+import ExpandedInfo from "@/components/RequisitionSystem/ExpandedInfo";
 import { mapGetters } from "vuex";
 
 export default {
-  components: { TopTable, RequisitionStages, InformativeMessage },
+  components: {
+    TopTable,
+    RequisitionStages,
+    InformativeMessage,
+    ActionButtons,
+    ExpandedInfo,
+  },
   data: () => ({
     expanded: [],
     search: { search: "" },
@@ -110,7 +89,7 @@ export default {
   }),
   methods: {
     lastEvent(requisition) {
-      let events = this.arrayOfAllEventsOfSelectedRequisition(requisition);
+      let events = this.allEventsOfSelectedRequisition(requisition);
       let arrayOfIds = events.map((event) => event.id);
       let maxId = Math.max.apply(Math, arrayOfIds);
       let lastEvent = this.REQUISITIONS_HISTORY.find(
@@ -130,11 +109,12 @@ export default {
         return lastEvent;
       }
     },
-    arrayOfAllEventsOfSelectedRequisition(requisition) {
+    allEventsOfSelectedRequisition(requisition) {
       let arr = this.REQUISITIONS_HISTORY.filter((event) => {
         return event.requisition_id == requisition.id;
       });
       if (arr != undefined) {
+        // console.log(arr, "allEventsOfSelectedRequisition");
         return arr;
       }
     },
@@ -184,10 +164,6 @@ export default {
       return this.editedItem.current_step;
     },
     currentStageName() {
-      console.log(
-        this.currentRequisitionStages[this.currentStep - 1],
-        "currentStageName"
-      );
       return this.currentRequisitionStages[this.currentStep - 1];
     },
     lastComplitedStage() {
@@ -197,7 +173,6 @@ export default {
       let permissions = this.CURRENT_USER_PERMISSIONS;
       if (permissions != undefined) {
         return permissions.indexOf(this.currentStageName) != -1;
-        // console.log(result, "isAvaliable");
       } else {
         return false;
       }
