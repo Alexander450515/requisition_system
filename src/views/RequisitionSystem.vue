@@ -105,7 +105,7 @@ export default {
       { text: "Время создания", value: "create_date" },
       { text: "Заявитель", value: "requisition_creator" },
       { text: "Тип заявки", value: "requisition_type" },
-      { text: "", value: "actions", width: 260 },
+      { text: "", value: "actions", width: 260, sortable: false },
     ],
     editedIndex: 0,
     editedItem: {},
