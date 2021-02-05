@@ -65,11 +65,11 @@
     {
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
-      "current_step": 2,
+      "current_step": 3,
       "create_date": "05.02.2021, 01:19:19",
       "status": "Передана на визирование",
-      "last_complited_stage": "Первоначальное рассмотрение",
-      "current_stage": "Проверка отделом безопасности",
+      "last_complited_stage": "Проверка отделом безопасности",
+      "current_stage": "Инструктаж ТБ",
       "id": 1
     }
   ],
@@ -103,6 +103,16 @@
       "current_stage": "Проверка отделом безопасности",
       "requisition_type": "Постоянный",
       "id": 3
+    },
+    {
+      "date": "05.02.2021, 09:59:24",
+      "status": "Передана на визирование",
+      "user": "Специалист по безопасности",
+      "requisition_id": 1,
+      "last_complited_stage": "Проверка отделом безопасности",
+      "current_stage": "Инструктаж ТБ",
+      "requisition_type": "Постоянный",
+      "id": 4
     }
   ]
 }

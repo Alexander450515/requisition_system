@@ -128,8 +128,8 @@ export default new Vuex.Store({
             requisition_type: requisition_type,
           }
         );
-        await dispatch("GET_REQUISITIONS");
         if (response.status == 200) {
+          await dispatch("GET_REQUISITIONS");
           await dispatch("CREATE_EVENT", {
             status: status,
             requisition_id: id,
