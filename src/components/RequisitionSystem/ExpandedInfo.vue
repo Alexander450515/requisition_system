@@ -5,11 +5,7 @@
       {{
         `${lastEvent(item).user} изменил статус заявки на "${
           lastEvent(item).status
-        }" ${lastEvent(item).date}. Текущий этап визирования: "${
-          lastEvent(item).current_stage != ""
-            ? lastEvent(item).current_stage
-            : "Визирование еще не началось"
-        }".`
+        }" ${lastEvent(item).date}. ${this.currentStageName}.`
       }}
     </div>
     <div class="d-inline mr-10">
@@ -47,6 +43,20 @@ export default {
   methods: {
     closeModalWindow() {
       this.dialog = false;
+    },
+  },
+  computed: {
+    currentStageName() {
+      if (this.lastEvent(this.item).current_stage) {
+        return `Текущий этап визирования: "${
+          this.lastEvent(this.item).current_stage
+        }"`;
+      } else if (this.lastEvent(this.item).current_stage != undefined) {
+        return "Визирование еще не началось";
+      } else {
+        console.log("Визирование закончено");
+        return "Визирование закончено";
+      }
     },
   },
 };
