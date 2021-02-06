@@ -32,6 +32,17 @@
     >
       Передать к исполнению
     </v-btn>
+    <!-- Вернуть на визирование -->
+    <v-btn
+      v-if="item.status == 'Отклонена'"
+      :color="havePermission ? 'success' : 'grey'"
+      small
+      rounded
+      dark
+      @click="$emit('openRequisition')"
+    >
+      Вернуть на визирование
+    </v-btn>
   </div>
 </template>
 
@@ -41,5 +52,6 @@ export default {
     item: Object,
     havePermission: Boolean,
   },
+  computed: {},
 };
 </script>

@@ -27,6 +27,7 @@
           :disabled="!havePermission"
           color="success"
           @click="accept(index + 1)"
+          v-if="editedItem.status != 'Отклонена'"
         >
           Согласовать
         </v-btn>
@@ -36,8 +37,19 @@
           class="ml-2"
           color="error"
           @click="reject(index + 1)"
+          v-if="editedItem.status != 'Отклонена'"
         >
           Отклонить
+        </v-btn>
+
+        <v-btn
+          :disabled="!havePermission"
+          class="ml-2"
+          color="primary"
+          @click="unReject(index + 1)"
+          v-if="editedItem.status == 'Отклонена'"
+        >
+          Вернуть на визирование
         </v-btn>
 
         <v-btn class="ml-2" text @click="$emit('closeRequisitionModalWindow')">
@@ -96,6 +108,20 @@ export default {
         id: this.editedItem.id,
         current_step: this.currentStep,
         status: "Отклонена",
+        last_complited_stage: this.currentRequisitionStages[
+          this.currentStep - 2
+        ],
+        current_stage: this.currentRequisitionStages[this.currentStep - 1],
+      };
+      this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
+      this.$emit("closeRequisitionModalWindow");
+      this.$emit("showInformativeMessage");
+    },
+    unReject() {
+      let updatedRequisition = {
+        id: this.editedItem.id,
+        current_step: this.currentStep,
+        status: "Передана на визирование",
         last_complited_stage: this.currentRequisitionStages[
           this.currentStep - 2
         ],
