@@ -54,7 +54,6 @@ export default {
       } else if (this.lastEvent(this.item).current_stage != undefined) {
         return "Визирование еще не началось";
       } else {
-        console.log("Визирование закончено");
         return "Визирование закончено";
       }
     },

@@ -17,17 +17,21 @@
         <ActionButtons
           :item="item"
           :havePermission="havePermission"
+          :editedItem="editedItem"
           @sendToAgreement="sendToAgreement(item)"
           @openRequisition="openRequisition(item)"
         />
-        <v-dialog v-model="dialogOpen" max-width="1200px" :retain-focus="false">
+        <v-dialog
+          v-model="dialogOpen"
+          max-width="1200px"
+          :retain-focus="false"
+          @click:outside="closeRequisitionModalWindow"
+        >
           <div class="white">
             <RequisitionStages
               :editedItem="editedItem"
-              :currentRequisitionStages="currentRequisitionStages"
-              :currentStep="currentStep"
-              :lastComplitedStage="lastComplitedStage"
               :havePermission="havePermission"
+              :currentRequisitionStages="currentRequisitionStages"
               @closeRequisitionModalWindow="closeRequisitionModalWindow"
               @showInformativeMessage="showInformativeMessage"
             />
@@ -48,8 +52,6 @@
     </v-data-table>
     <InformativeMessage
       :snackbar="snackbar"
-      :currentRequisitionStages="currentRequisitionStages"
-      :currentStep="currentStep"
       @closeInformativeMessage="closeInformativeMessage"
     />
   </div>
@@ -85,7 +87,6 @@ export default {
       { text: "Тип заявки", value: "requisition_type" },
       { text: "", value: "actions", width: 260, sortable: false },
     ],
-    editedIndex: 0,
     editedItem: {},
   }),
   methods: {
@@ -93,9 +94,7 @@ export default {
       let events = this.allEventsOfSelectedRequisition(requisition);
       let arrayOfIds = events.map((event) => event.id);
       let maxId = Math.max.apply(Math, arrayOfIds);
-      let lastEvent = this.REQUISITIONS_HISTORY.find(
-        (event) => event.id == maxId
-      );
+      let lastEvent = this.ALL_EVENTS.find((event) => event.id == maxId);
       if (lastEvent == undefined) {
         return {
           date: "",
@@ -111,7 +110,7 @@ export default {
       }
     },
     allEventsOfSelectedRequisition(requisition) {
-      let arr = this.REQUISITIONS_HISTORY.filter((event) => {
+      let arr = this.ALL_EVENTS.filter((event) => {
         return event.requisition_id == requisition.id;
       });
       if (arr != undefined) {
@@ -119,29 +118,50 @@ export default {
         return arr;
       }
     },
-    sendToAgreement(requisition) {
-      this.editedItem = Object.assign({}, requisition);
+    currentRequisitionStages(item) {
+      let requisition = this.REQUISITION_TYPES.find(
+        (type) => type.requisition_type == item.requisition_type
+      );
+      if (requisition != undefined) {
+        return requisition.stages;
+      }
+    },
+    havePermission(item) {
+      const permission = this.CURRENT_USER_PERMISSIONS;
+      const currentStage = this.currentRequisitionStages(item)[
+        item.current_step
+      ];
+      if (permission != undefined && currentStage != undefined) {
+        return permission.indexOf(currentStage) != -1;
+      } else {
+        return false;
+      }
+    },
+    sendToAgreement(item) {
       return this.$store.dispatch("CHANGE_STAGE", {
-        id: requisition.id,
-        current_stage: this.lastComplitedStage,
+        id: item.id,
+        current_stage: this.currentRequisitionStages(item)[
+          item.current_step + 1
+        ],
         status: "Передана на визирование",
         last_complited_stage: "",
         current_step: 1,
-        requisition_type: requisition.requisition_type,
+        requisition_type: item.requisition_type,
       });
     },
+
     showInformativeMessage() {
       this.snackbar.snackbar = true;
     },
     closeInformativeMessage() {
       this.snackbar.snackbar = false;
     },
-    openRequisition(requisition) {
-      this.editedIndex = this.REQUISITIONS.indexOf(requisition);
-      this.editedItem = Object.assign({}, requisition);
+    openRequisition(item) {
+      this.editedItem = Object.assign({}, item);
       this.dialogOpen = true;
     },
     closeRequisitionModalWindow() {
+      this.editedItem = Object.assign({}, {});
       this.dialogOpen = false;
     },
   },
@@ -149,36 +169,9 @@ export default {
     ...mapGetters([
       "REQUISITIONS",
       "REQUISITION_TYPES",
-      "REQUISITIONS_HISTORY",
+      "ALL_EVENTS",
       "CURRENT_USER_PERMISSIONS",
     ]),
-    currentRequisitionStages() {
-      let editedItem = this.editedItem.requisition_type;
-      if (editedItem != undefined) {
-        return this.REQUISITION_TYPES.find(
-          (type) => type.requisition_type == editedItem
-        ).stages;
-      } else {
-        return [];
-      }
-    },
-    currentStep() {
-      return this.editedItem.current_step;
-    },
-    // currentStageName() {
-    //   return this.currentRequisitionStages[this.currentStep - 1];
-    // },
-    lastComplitedStage() {
-      return this.currentRequisitionStages[this.currentStep - 1];
-    },
-    havePermission() {
-      let permissions = this.CURRENT_USER_PERMISSIONS;
-      if (permissions != undefined) {
-        return permissions.indexOf(this.lastComplitedStage) != -1;
-      } else {
-        return false;
-      }
-    },
   },
 };
 </script>

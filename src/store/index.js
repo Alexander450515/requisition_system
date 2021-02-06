@@ -184,17 +184,13 @@ export default new Vuex.Store({
         (user) => user.name == getters.CURRENT_USER
       );
       if (currentUserObject !== undefined) {
-        console.log(
-          currentUserObject.permissions,
-          " currentUserObject.permissions"
-        );
         return currentUserObject.permissions;
       }
     },
     REQUISITION_TYPES(state) {
       return state.requisition_types;
     },
-    REQUISITIONS_HISTORY(state) {
+    ALL_EVENTS(state) {
       return state.requisitions_history;
     },
   },

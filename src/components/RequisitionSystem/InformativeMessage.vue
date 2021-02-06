@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-snackbar
+    <!-- <v-snackbar
       v-model="snackbarBoolean"
       :timeout="timeout"
       right
@@ -23,7 +23,7 @@
           Close
         </v-btn>
       </template>
-    </v-snackbar>
+    </v-snackbar> -->
   </div>
 </template>
 
