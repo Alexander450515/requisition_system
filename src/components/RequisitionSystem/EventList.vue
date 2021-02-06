@@ -15,7 +15,10 @@
             <v-list-item-subtitle v-html="event.date"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-divider :key="index"></v-divider>
+        <v-divider
+          :key="`${index}-divider`"
+          v-if="index < numberOfEvents"
+        ></v-divider>
       </template>
     </v-list>
   </div>
@@ -25,6 +28,11 @@
 export default {
   props: {
     allEventsOfSelectedRequisition: Array,
+  },
+  computed: {
+    numberOfEvents() {
+      return this.allEventsOfSelectedRequisition.length - 1;
+    },
   },
 };
 </script>

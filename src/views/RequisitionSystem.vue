@@ -6,6 +6,7 @@
       :items-per-page="10"
       :expanded.sync="expanded"
       show-expand
+      single-expand
       :search="search.search"
     >
       <template v-slot:top>
