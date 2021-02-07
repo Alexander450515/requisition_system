@@ -201,7 +201,7 @@ export default {
 
 .light-green {
   color: black;
-  background-color: rgb(107, 196, 107);
+  background-color: rgb(105, 253, 105);
 }
 
 .yellow {
