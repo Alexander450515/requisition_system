@@ -7,6 +7,7 @@
       :expanded.sync="expanded"
       show-expand
       :search="search.search"
+      :item-class="lines"
     >
       <template v-slot:top>
         <TopTable :search="search" />
@@ -86,9 +87,25 @@ export default {
       { text: "Тип заявки", value: "requisition_type" },
       { text: "", value: "actions", width: 260, sortable: false },
     ],
+
     editedItem: {},
   }),
   methods: {
+    lines(item) {
+      if (item.status == "Передана на визирование") {
+        const yellow = "yellow";
+        return yellow;
+      } else if (item.status == "Отклонена") {
+        const red = "red";
+        return red;
+      } else if (item.status == "Утверждена") {
+        const green = "green";
+        return green;
+      } else if (item.status == "Принята к исполнению") {
+        const lightGreen = "light-green";
+        return lightGreen;
+      }
+    },
     lastEvent(requisition) {
       let events = this.allEventsOfSelectedRequisition(requisition);
       let arrayOfIds = events.map((event) => event.id);
@@ -170,3 +187,25 @@ export default {
   },
 };
 </script>
+
+<style lang="css">
+.red {
+  color: black;
+  background-color: red;
+}
+
+.green {
+  color: black;
+  background-color: green;
+}
+
+.light-green {
+  color: black;
+  background-color: rgb(107, 196, 107);
+}
+
+.yellow {
+  color: black;
+  background-color: yellow;
+}
+</style>

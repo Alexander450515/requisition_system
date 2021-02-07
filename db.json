@@ -78,12 +78,22 @@
     {
       "requisition_creator": "Специалист по безопасности",
       "requisition_type": "Временный",
-      "current_step": 1,
+      "current_step": 4,
       "create_date": "07.02.2021, 18:53:29",
-      "status": "Передана на визирование",
-      "last_complited_stage": "",
-      "current_stage": "Первоначальное рассмотрение",
+      "status": "Принята к исполнению",
+      "last_complited_stage": "Передача в БП",
+      "current_stage": "Передача в БП",
       "id": 2
+    },
+    {
+      "requisition_creator": "Охраник",
+      "requisition_type": "Одноразовый",
+      "current_step": 2,
+      "create_date": "07.02.2021, 19:26:48",
+      "status": "Утверждена",
+      "last_complited_stage": "Инструктаж ТБ",
+      "current_stage": "Передача в БП",
+      "id": 3
     }
   ],
   "requisitions_history": [
@@ -136,6 +146,83 @@
       "current_stage": "Проверка отделом безопасности",
       "requisition_type": "Постоянный",
       "id": 5
+    },
+    {
+      "date": "07.02.2021, 19:24:28",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 2,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Инструктаж ТБ",
+      "requisition_type": "Временный",
+      "id": 6
+    },
+    {
+      "date": "07.02.2021, 19:25:29",
+      "status": "Отклонена",
+      "user": "Специалист по безопасности",
+      "requisition_id": 2,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Инструктаж ТБ",
+      "id": 7
+    },
+    {
+      "date": "07.02.2021, 19:26:05",
+      "status": "Передана на визирование",
+      "user": "Специалист по безопасности",
+      "requisition_id": 2,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Инструктаж ТБ",
+      "id": 8
+    },
+    {
+      "date": "07.02.2021, 19:26:08",
+      "status": "Утверждена",
+      "user": "Специалист по безопасности",
+      "requisition_id": 2,
+      "last_complited_stage": "Инструктаж ТБ",
+      "current_stage": "Передача в БП",
+      "requisition_type": "Временный",
+      "id": 9
+    },
+    {
+      "date": "07.02.2021, 19:26:17",
+      "status": "Принята к исполнению",
+      "user": "Охраник",
+      "requisition_id": 2,
+      "last_complited_stage": "Передача в БП",
+      "requisition_type": "Временный",
+      "id": 10
+    },
+    {
+      "date": "07.02.2021, 19:26:48",
+      "status": "Создана",
+      "user": "Охраник",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "",
+      "requisition_type": "Одноразовый",
+      "id": 11
+    },
+    {
+      "date": "07.02.2021, 19:26:50",
+      "status": "Передана на визирование",
+      "user": "Охраник",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "Инструктаж ТБ",
+      "requisition_type": "Одноразовый",
+      "id": 12
+    },
+    {
+      "date": "07.02.2021, 19:26:58",
+      "status": "Утверждена",
+      "user": "Специалист по безопасности",
+      "requisition_id": 3,
+      "last_complited_stage": "Инструктаж ТБ",
+      "current_stage": "Передача в БП",
+      "requisition_type": "Одноразовый",
+      "id": 13
     }
   ]
 }
