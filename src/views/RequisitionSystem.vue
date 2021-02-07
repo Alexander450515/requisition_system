@@ -6,7 +6,6 @@
       :items-per-page="10"
       :expanded.sync="expanded"
       show-expand
-      single-expand
       :search="search.search"
     >
       <template v-slot:top>
@@ -114,7 +113,6 @@ export default {
         return event.requisition_id == requisition.id;
       });
       if (arr != undefined) {
-        // console.log(arr, "allEventsOfSelectedRequisition");
         return arr;
       }
     },
@@ -127,10 +125,8 @@ export default {
       }
     },
     havePermission(item) {
-      const permission = this.CURRENT_USER_PERMISSIONS;
-      const currentStage = this.currentRequisitionStages(item)[
-        item.current_step
-      ];
+      let permission = this.CURRENT_USER_PERMISSIONS;
+      let currentStage = this.currentRequisitionStages(item)[item.current_step];
       if (permission != undefined && currentStage != undefined) {
         return permission.indexOf(currentStage) != -1;
       } else {
@@ -161,7 +157,6 @@ export default {
       this.dialogOpen = true;
     },
     closeRequisitionModalWindow() {
-      this.editedItem = Object.assign({}, {});
       this.dialogOpen = false;
     },
   },

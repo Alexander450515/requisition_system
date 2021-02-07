@@ -55,8 +55,7 @@ export default {
     requisition_type: "",
     rules: {
       required: (value) => !!value || "Заполните поле",
-      requiredUser: (value) =>
-        !!value || "Выберите пользователя в главном меню",
+      requiredUser: (value) => !!value || "Сначала выберите пользователя",
     },
     items: ["Временный", "Постоянный", "Одноразовый"],
   }),
@@ -74,7 +73,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.$store.dispatch("CREATE_REQUISITION", requisition);
         this.$emit("closeModalWindow");
-        this.$emit("showInformativeMessage");
+        // this.$emit("showInformativeMessage");
       }
     },
   },

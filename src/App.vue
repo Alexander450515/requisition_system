@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import NavDrawer from "@/components/NavDrawer";
+import NavDrawer from "@/components/NavDrawer/NavDrawer";
 import { mapActions } from "vuex";
 
 export default {
@@ -38,11 +38,11 @@ export default {
       "GET_REQUISITIONS_HISTORY",
     ]),
   },
-  created() {
-    this.GET_REQUISITIONS();
-    this.GET_USERS();
-    this.GET_REQUISITION_TYPES();
-    this.GET_REQUISITIONS_HISTORY();
+  async created() {
+    await this.GET_REQUISITION_TYPES();
+    await this.GET_REQUISITIONS();
+    await this.GET_USERS();
+    await this.GET_REQUISITIONS_HISTORY();
   },
 };
 </script>

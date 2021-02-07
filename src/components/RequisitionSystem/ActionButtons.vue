@@ -14,7 +14,7 @@
     <!-- Открыть (для визирования)-->
     <v-btn
       v-if="item.status == 'Передана на визирование'"
-      :color="havePermission(item) ? 'success' : 'grey'"
+      :color="color"
       small
       rounded
       dark
@@ -25,7 +25,7 @@
     <!-- Передать к исполнению -->
     <v-btn
       v-if="item.status == 'Утверждена'"
-      :color="havePermission(item) ? 'success' : 'grey'"
+      :color="color"
       small
       rounded
       dark
@@ -36,7 +36,7 @@
     <!-- Вернуть на визирование -->
     <v-btn
       v-if="item.status == 'Отклонена'"
-      :color="havePermission(item) ? 'success' : 'grey'"
+      :color="color"
       small
       rounded
       dark
@@ -53,6 +53,11 @@ export default {
     item: Object,
     havePermission: Function,
     editedItem: Object,
+  },
+  computed: {
+    color() {
+      return this.havePermission(this.item) ? "success" : "grey";
+    },
   },
 };
 </script>

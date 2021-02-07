@@ -2,25 +2,30 @@
   <div>
     <v-list-item>
       <v-list-item-content>
-        <v-select
-          :items="USERS"
-          label="Выбрать пользователя"
-          dense
-          outlined
-          v-model="currentUser"
-          @input="selectedUser"
-          :error="!currentUser"
-          :success="!!currentUser"
-        ></v-select>
-        <v-list-item-subtitle v-if="CURRENT_USER_PERMISSIONS">
-          Доступные этапы визирования
-        </v-list-item-subtitle>
-        <v-list-item-subtitle v-else>
-          Нет доступных этапов визирования
-        </v-list-item-subtitle>
-        <!-- <v-list-item-subtitle>
-          {{ this.CURRENT_USER }}
-        </v-list-item-subtitle> -->
+        <!--  -->
+        <v-dialog v-model="dialog" max-width="500px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn dark v-bind="attrs" v-on="on">
+              Сменить пользователя
+            </v-btn>
+          </template>
+          <div class="white">
+            <AuthForm @closeModalWindow="closeModalWindow" />
+          </div>
+        </v-dialog>
+        <div class="mt-2">
+          <v-list-item-title class="my-2 font-weight-bold">
+            {{ this.CURRENT_USER }}
+          </v-list-item-title>
+          <v-divider></v-divider>
+
+          <v-list-item-subtitle v-if="CURRENT_USER_PERMISSIONS" class="mt-2">
+            Доступные этапы визирования
+          </v-list-item-subtitle>
+          <v-list-item-subtitle v-else class="mt-2">
+            Нет доступных этапов визирования
+          </v-list-item-subtitle>
+        </div>
         <div>
           <v-chip
             class="ma-2 "
@@ -50,10 +55,15 @@
 </template>
 
 <script>
+import AuthForm from "@/components/NavDrawer/AuthForm";
 import { mapGetters } from "vuex";
 
 export default {
+  components: {
+    AuthForm,
+  },
   data: () => ({
+    dialog: false,
     currentUser: "",
     permissions: [],
     items: [
@@ -67,9 +77,8 @@ export default {
   },
 
   methods: {
-    selectedUser() {
-      let selectedUser = this.currentUser;
-      this.$store.commit("SET_SELECTED_USER", selectedUser);
+    closeModalWindow() {
+      this.dialog = false;
     },
   },
 };
