@@ -75,9 +75,13 @@ export default {
   },
   data: () => ({
     expanded: [],
-    search: { search: "" },
+    search: {
+      search: "",
+    },
     dialogOpen: false,
-    snackbar: { snackbar: false },
+    snackbar: {
+      snackbar: false,
+    },
     headers: [
       { text: "№", value: "id" },
       { text: "Статус", value: "status", width: 250 },
@@ -92,26 +96,25 @@ export default {
   }),
   methods: {
     lines(item) {
-      if (item.status == "Передана на визирование") {
-        const yellow = "yellow";
-        return yellow;
-      } else if (item.status == "Отклонена") {
-        const red = "red";
-        return red;
-      } else if (item.status == "Утверждена") {
-        const green = "green";
-        return green;
-      } else if (item.status == "Принята к исполнению") {
-        const lightGreen = "light-green";
-        return lightGreen;
+      switch (item.status) {
+        case "Передана на визирование":
+          return "yellow";
+        case "Отклонена":
+          return "red";
+        case "Утверждена":
+          return "green";
+        case "Принята к исполнению":
+          return "light-green";
+        default:
+          break;
       }
     },
     lastEvent(requisition) {
       let events = this.allEventsOfSelectedRequisition(requisition);
       let arrayOfIds = events.map((event) => event.id);
-      let maxId = Math.max.apply(Math, arrayOfIds);
-      let lastEvent = this.ALL_EVENTS.find((event) => event.id == maxId);
-      if (lastEvent == undefined) {
+      let maxId = Math.max(...arrayOfIds);
+      let lastEvent = this.ALL_EVENTS.find((event) => event.id === maxId);
+      if (lastEvent === undefined) {
         return {
           date: "",
           status: "",
@@ -121,15 +124,14 @@ export default {
           last_complited_stage: "",
           current_stage: "",
         };
-      } else {
-        return lastEvent;
       }
+      return lastEvent;
     },
     allEventsOfSelectedRequisition(requisition) {
       let arr = this.ALL_EVENTS.filter((event) => {
-        return event.requisition_id == requisition.id;
+        return event.requisition_id === requisition.id;
       });
-      if (arr != undefined) {
+      if (arr !== undefined) {
         return arr;
       }
     },
@@ -146,9 +148,8 @@ export default {
       let currentStage = this.currentRequisitionStages(item)[item.current_step];
       if (permission != undefined && currentStage != undefined) {
         return permission.indexOf(currentStage) != -1;
-      } else {
-        return false;
       }
+      return false;
     },
     sendToAgreement(item) {
       return this.$store.dispatch("CHANGE_STAGE", {

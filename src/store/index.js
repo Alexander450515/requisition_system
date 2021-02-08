@@ -34,38 +34,44 @@ export default new Vuex.Store({
   actions: {
     async GET_REQUISITIONS({ commit }) {
       try {
-        const requisitions = await axios.get(
-          "http://localhost:3000/requisitions"
-        );
-        commit("SET_REQUISITIONS_TO_STATE", requisitions.data);
+        const response = await axios.get("http://localhost:3000/requisitions");
+        if ([200].includes(response.status)) {
+          commit("SET_REQUISITIONS_TO_STATE", response.data);
+        }
       } catch (error) {
         console.log(error);
       }
     },
     async GET_USERS({ commit }) {
       try {
-        const users = await axios.get("http://localhost:3000/users");
-        commit("SET_USERS_TO_STATE", users.data);
+        const response = await axios.get("http://localhost:3000/users");
+        if ([200].includes(response.status)) {
+          commit("SET_USERS_TO_STATE", response.data);
+        }
       } catch (error) {
         console.log(error);
       }
     },
     async GET_REQUISITION_TYPES({ commit }) {
       try {
-        const requisition_types = await axios.get(
+        const response = await axios.get(
           "http://localhost:3000/requisition_types"
         );
-        commit("SET_REQUISITION_TYPES_TO_STATE", requisition_types.data);
+        if ([200].includes(response.status)) {
+          commit("SET_REQUISITION_TYPES_TO_STATE", response.data);
+        }
       } catch (error) {
         console.log(error);
       }
     },
     async GET_REQUISITIONS_HISTORY({ commit }) {
       try {
-        const requisitions_history = await axios.get(
+        const response = await axios.get(
           "http://localhost:3000/requisitions_history"
         );
-        commit("SET_HISTORY_TO_STATE", requisitions_history.data);
+        if ([200].includes(response.status)) {
+          commit("SET_HISTORY_TO_STATE", response.data);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -83,25 +89,30 @@ export default new Vuex.Store({
       }
     ) {
       try {
-        await axios.post("http://localhost:3000/requisitions", {
-          requisition_creator,
-          requisition_type,
-          current_step,
-          create_date,
-          status,
-          last_complited_stage,
-          current_stage,
-        });
-        await dispatch("GET_REQUISITIONS");
-        let requisition_id =
-          getters.REQUISITIONS[getters.REQUISITIONS.length - 1].id;
-        await dispatch("CREATE_EVENT", {
-          status: status,
-          requisition_id: requisition_id,
-          current_stage: current_stage,
-          last_complited_stage: last_complited_stage,
-          requisition_type: requisition_type,
-        });
+        const response = await axios.post(
+          "http://localhost:3000/requisitions",
+          {
+            requisition_creator,
+            requisition_type,
+            current_step,
+            create_date,
+            status,
+            last_complited_stage,
+            current_stage,
+          }
+        );
+        if ([200, 201].includes(response.status)) {
+          await dispatch("GET_REQUISITIONS");
+          let requisition_id =
+            getters.REQUISITIONS[getters.REQUISITIONS.length - 1].id;
+          await dispatch("CREATE_EVENT", {
+            status: status,
+            requisition_id: requisition_id,
+            current_stage: current_stage,
+            last_complited_stage: last_complited_stage,
+            requisition_type: requisition_type,
+          });
+        }
       } catch (error) {
         console.log(error);
       }
@@ -128,7 +139,7 @@ export default new Vuex.Store({
             requisition_type: requisition_type,
           }
         );
-        if (response.status == 200) {
+        if ([200, 201].includes(response.status)) {
           await dispatch("GET_REQUISITIONS");
           await dispatch("CREATE_EVENT", {
             status: status,
@@ -153,17 +164,22 @@ export default new Vuex.Store({
       }
     ) {
       try {
-        await axios.post("http://localhost:3000/requisitions_history", {
-          date: new Date().toLocaleString(),
-          status: status,
-          user: getters.CURRENT_USER,
-          requisition_id: requisition_id,
-          last_complited_stage: last_complited_stage,
-          current_stage: current_stage,
-          requisition_type: requisition_type,
-        });
-        await dispatch("GET_REQUISITIONS");
-        await dispatch("GET_REQUISITIONS_HISTORY");
+        const response = await axios.post(
+          "http://localhost:3000/requisitions_history",
+          {
+            date: new Date().toLocaleString(),
+            status: status,
+            user: getters.CURRENT_USER,
+            requisition_id: requisition_id,
+            last_complited_stage: last_complited_stage,
+            current_stage: current_stage,
+            requisition_type: requisition_type,
+          }
+        );
+        if ([200, 201].includes(response.status)) {
+          await dispatch("GET_REQUISITIONS");
+          await dispatch("GET_REQUISITIONS_HISTORY");
+        }
       } catch (error) {
         console.log(error);
       }

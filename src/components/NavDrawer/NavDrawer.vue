@@ -28,12 +28,12 @@
         </div>
         <div>
           <v-chip
-            class="ma-2 "
+            class="ma-2"
             style="max-width: 210px;"
             v-for="permissions in CURRENT_USER_PERMISSIONS"
             :key="permissions.id"
           >
-            {{ permissions }}
+            <p class="text-truncate my-auto">{{ permissions }}</p>
           </v-chip>
         </div>
       </v-list-item-content>

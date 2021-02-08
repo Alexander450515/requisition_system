@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   props: {
     editedItem: Object,
@@ -73,7 +73,6 @@ export default {
   },
   data: () => ({}),
   computed: {
-    ...mapGetters(["CURRENT_USER_PERMISSIONS", "REQUISITION_TYPES"]),
     stageInfo() {
       return `Информация о этапе визирования
             ${
@@ -85,6 +84,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["CHANGE_STAGE"]),
     accept(step) {
       let updatedRequisition = {
         id: this.editedItem.id,

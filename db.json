@@ -68,18 +68,18 @@
     {
       "requisition_creator": "Администратор",
       "requisition_type": "Постоянный",
-      "current_step": 1,
-      "create_date": "07.02.2021, 19:34:50",
+      "current_step": 2,
+      "create_date": "08.02.2021, 10:26:56",
       "status": "Передана на визирование",
-      "last_complited_stage": "",
-      "current_stage": "Первоначальное рассмотрение",
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
       "id": 1
     },
     {
-      "requisition_creator": "Специалист по безопасности",
+      "requisition_creator": "Администратор",
       "requisition_type": "Временный",
       "current_step": 4,
-      "create_date": "07.02.2021, 19:35:06",
+      "create_date": "08.02.2021, 10:27:29",
       "status": "Принята к исполнению",
       "last_complited_stage": "Передача в БП",
       "current_stage": "Передача в БП",
@@ -87,38 +87,48 @@
     },
     {
       "requisition_creator": "Специалист по безопасности",
-      "requisition_type": "Одноразовый",
-      "current_step": 2,
-      "create_date": "07.02.2021, 19:35:57",
+      "requisition_type": "Постоянный",
+      "current_step": 4,
+      "create_date": "08.02.2021, 10:55:26",
       "status": "Утверждена",
       "last_complited_stage": "Инструктаж ТБ",
       "current_stage": "Передача в БП",
       "id": 3
     },
     {
-      "requisition_creator": "Администратор",
-      "requisition_type": "Одноразовый",
-      "current_step": 1,
-      "create_date": "07.02.2021, 19:36:20",
-      "status": "Отклонена",
-      "last_complited_stage": "Создание",
+      "requisition_creator": "Охраник",
+      "requisition_type": "Временный",
+      "current_step": 2,
+      "create_date": "08.02.2021, 10:58:25",
+      "status": "Передана на визирование",
+      "last_complited_stage": "Первоначальное рассмотрение",
       "current_stage": "Инструктаж ТБ",
       "id": 4
     },
     {
-      "requisition_creator": "Администратор",
-      "requisition_type": "Одноразовый",
+      "requisition_creator": "Оператор",
+      "requisition_type": "Постоянный",
+      "current_step": 1,
+      "create_date": "08.02.2021, 11:00:09",
+      "status": "Передана на визирование",
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "id": 5
+    },
+    {
+      "requisition_creator": "Оператор",
+      "requisition_type": "Временный",
       "current_step": 0,
-      "create_date": "07.02.2021, 19:36:44",
+      "create_date": "08.02.2021, 11:26:38",
       "status": "Создана",
       "last_complited_stage": "",
       "current_stage": "",
-      "id": 5
+      "id": 6
     }
   ],
   "requisitions_history": [
     {
-      "date": "07.02.2021, 19:34:50",
+      "date": "08.02.2021, 10:26:56",
       "status": "Создана",
       "user": "Администратор",
       "requisition_id": 1,
@@ -128,7 +138,7 @@
       "id": 1
     },
     {
-      "date": "07.02.2021, 19:34:52",
+      "date": "08.02.2021, 10:26:57",
       "status": "Передана на визирование",
       "user": "Администратор",
       "requisition_id": 1,
@@ -138,122 +148,191 @@
       "id": 2
     },
     {
-      "date": "07.02.2021, 19:35:07",
+      "date": "08.02.2021, 10:26:59",
+      "status": "Передана на визирование",
+      "user": "Администратор",
+      "requisition_id": 1,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
+      "requisition_type": "Постоянный",
+      "id": 3
+    },
+    {
+      "date": "08.02.2021, 10:27:29",
       "status": "Создана",
-      "user": "Специалист по безопасности",
+      "user": "Администратор",
       "requisition_id": 2,
       "last_complited_stage": "",
       "current_stage": "",
       "requisition_type": "Временный",
-      "id": 3
+      "id": 4
     },
     {
-      "date": "07.02.2021, 19:35:08",
+      "date": "08.02.2021, 10:27:34",
       "status": "Передана на визирование",
-      "user": "Специалист по безопасности",
+      "user": "Администратор",
       "requisition_id": 2,
       "last_complited_stage": "",
       "current_stage": "Первоначальное рассмотрение",
       "requisition_type": "Временный",
-      "id": 4
+      "id": 5
     },
     {
-      "date": "07.02.2021, 19:35:20",
+      "date": "08.02.2021, 10:27:38",
       "status": "Передана на визирование",
       "user": "Администратор",
       "requisition_id": 2,
       "last_complited_stage": "Первоначальное рассмотрение",
       "current_stage": "Инструктаж ТБ",
       "requisition_type": "Временный",
-      "id": 5
+      "id": 6
     },
     {
-      "date": "07.02.2021, 19:35:28",
+      "date": "08.02.2021, 10:55:20",
+      "status": "Отклонена",
+      "user": "Специалист по безопасности",
+      "requisition_id": 2,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Инструктаж ТБ",
+      "id": 7
+    },
+    {
+      "date": "08.02.2021, 10:55:22",
+      "status": "Передана на визирование",
+      "user": "Специалист по безопасности",
+      "requisition_id": 2,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Инструктаж ТБ",
+      "id": 8
+    },
+    {
+      "date": "08.02.2021, 10:55:26",
+      "status": "Создана",
+      "user": "Специалист по безопасности",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "",
+      "requisition_type": "Постоянный",
+      "id": 9
+    },
+    {
+      "date": "08.02.2021, 10:55:28",
       "status": "Утверждена",
       "user": "Специалист по безопасности",
       "requisition_id": 2,
       "last_complited_stage": "Инструктаж ТБ",
       "current_stage": "Передача в БП",
       "requisition_type": "Временный",
-      "id": 6
+      "id": 10
     },
     {
-      "date": "07.02.2021, 19:35:37",
+      "date": "08.02.2021, 10:55:36",
       "status": "Принята к исполнению",
       "user": "Охраник",
       "requisition_id": 2,
       "last_complited_stage": "Передача в БП",
       "requisition_type": "Временный",
-      "id": 7
+      "id": 11
     },
     {
-      "date": "07.02.2021, 19:35:57",
+      "date": "08.02.2021, 10:58:25",
       "status": "Создана",
-      "user": "Специалист по безопасности",
-      "requisition_id": 3,
+      "user": "Охраник",
+      "requisition_id": 4,
       "last_complited_stage": "",
       "current_stage": "",
-      "requisition_type": "Одноразовый",
-      "id": 8
+      "requisition_type": "Временный",
+      "id": 12
     },
     {
-      "date": "07.02.2021, 19:35:58",
+      "date": "08.02.2021, 10:58:33",
+      "status": "Передана на визирование",
+      "user": "Охраник",
+      "requisition_id": 4,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "requisition_type": "Временный",
+      "id": 13
+    },
+    {
+      "date": "08.02.2021, 10:58:56",
+      "status": "Передана на визирование",
+      "user": "Оператор",
+      "requisition_id": 4,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Инструктаж ТБ",
+      "requisition_type": "Временный",
+      "id": 14
+    },
+    {
+      "date": "08.02.2021, 11:00:10",
+      "status": "Создана",
+      "user": "Оператор",
+      "requisition_id": 5,
+      "last_complited_stage": "",
+      "current_stage": "",
+      "requisition_type": "Постоянный",
+      "id": 15
+    },
+    {
+      "date": "08.02.2021, 11:06:16",
+      "status": "Передана на визирование",
+      "user": "Оператор",
+      "requisition_id": 5,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "requisition_type": "Постоянный",
+      "id": 16
+    },
+    {
+      "date": "08.02.2021, 11:14:39",
+      "status": "Передана на визирование",
+      "user": "Оператор",
+      "requisition_id": 3,
+      "last_complited_stage": "",
+      "current_stage": "Первоначальное рассмотрение",
+      "requisition_type": "Постоянный",
+      "id": 17
+    },
+    {
+      "date": "08.02.2021, 11:15:57",
+      "status": "Передана на визирование",
+      "user": "Оператор",
+      "requisition_id": 3,
+      "last_complited_stage": "Первоначальное рассмотрение",
+      "current_stage": "Проверка отделом безопасности",
+      "requisition_type": "Постоянный",
+      "id": 18
+    },
+    {
+      "date": "08.02.2021, 11:16:09",
       "status": "Передана на визирование",
       "user": "Специалист по безопасности",
       "requisition_id": 3,
-      "last_complited_stage": "",
+      "last_complited_stage": "Проверка отделом безопасности",
       "current_stage": "Инструктаж ТБ",
-      "requisition_type": "Одноразовый",
-      "id": 9
+      "requisition_type": "Постоянный",
+      "id": 19
     },
     {
-      "date": "07.02.2021, 19:36:03",
+      "date": "08.02.2021, 11:16:12",
       "status": "Утверждена",
       "user": "Специалист по безопасности",
       "requisition_id": 3,
       "last_complited_stage": "Инструктаж ТБ",
       "current_stage": "Передача в БП",
-      "requisition_type": "Одноразовый",
-      "id": 10
+      "requisition_type": "Постоянный",
+      "id": 20
     },
     {
-      "date": "07.02.2021, 19:36:20",
+      "date": "08.02.2021, 11:26:38",
       "status": "Создана",
-      "user": "Администратор",
-      "requisition_id": 4,
-      "last_complited_stage": "",
-      "current_stage": "",
-      "requisition_type": "Одноразовый",
-      "id": 11
-    },
-    {
-      "date": "07.02.2021, 19:36:21",
-      "status": "Передана на визирование",
-      "user": "Администратор",
-      "requisition_id": 4,
-      "last_complited_stage": "",
-      "current_stage": "Инструктаж ТБ",
-      "requisition_type": "Одноразовый",
-      "id": 12
-    },
-    {
-      "date": "07.02.2021, 19:36:35",
-      "status": "Отклонена",
       "user": "Оператор",
-      "requisition_id": 4,
-      "last_complited_stage": "Создание",
-      "current_stage": "Инструктаж ТБ",
-      "id": 13
-    },
-    {
-      "date": "07.02.2021, 19:36:44",
-      "status": "Создана",
-      "user": "Администратор",
-      "requisition_id": 5,
+      "requisition_id": 6,
       "last_complited_stage": "",
       "current_stage": "",
-      "requisition_type": "Одноразовый",
-      "id": 14
+      "requisition_type": "Временный",
+      "id": 21
     }
   ]
 }
