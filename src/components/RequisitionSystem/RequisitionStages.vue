@@ -101,7 +101,7 @@ export default {
 
       if (step < this.currentRequisitionStages(this.editedItem).length - 2) {
         updatedRequisition.status = "Передана на визирование";
-        this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
+        this.CHANGE_STAGE(updatedRequisition);
       }
       // Утверждена (все сотрудники производящие визирование заявки утвердили ее)
       else if (
@@ -109,7 +109,7 @@ export default {
         this.currentRequisitionStages(this.editedItem).length - 2
       ) {
         (updatedRequisition.status = "Утверждена"),
-          this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
+          this.CHANGE_STAGE(updatedRequisition);
       }
       // Принята к исполнению (получена непосредственно в БП,
       // произведено действие, например выдан пропуск)
@@ -118,7 +118,7 @@ export default {
         this.currentRequisitionStages(this.editedItem).length - 1
       ) {
         (updatedRequisition.status = "Принята к исполнению"),
-          this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
+          this.CHANGE_STAGE(updatedRequisition);
       }
       this.$emit("closeRequisitionModalWindow");
       this.$emit("showInformativeMessage");
@@ -135,7 +135,7 @@ export default {
           this.editedItem.current_step
         ],
       };
-      this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
+      this.CHANGE_STAGE(updatedRequisition);
       this.$emit("closeRequisitionModalWindow");
       this.$emit("showInformativeMessage");
     },
@@ -151,7 +151,7 @@ export default {
           this.editedItem.current_step
         ],
       };
-      this.$store.dispatch("CHANGE_STAGE", updatedRequisition);
+      this.CHANGE_STAGE(updatedRequisition);
       this.$emit("closeRequisitionModalWindow");
       this.$emit("showInformativeMessage");
     },
